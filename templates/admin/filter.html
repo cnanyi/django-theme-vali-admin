@@ -1,10 +1,11 @@
 {% load i18n %}
-<div class="fc-toolbar">
-<span class="fc-left">{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</span>
-<ul>
+<div class="info">
+<label>{% blocktrans with filter_title=title %} {{ filter_title }}: {% endblocktrans %}
+<select>
 {% for choice in choices %}
-    <li {% if choice.selected %}class="selected"{% endif %}>
-    <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a></li>
+    <option {% if choice.selected %}class="selected"{% endif %}>
+    <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a></option>
 {% endfor %}
-</ul>
+</select>
+    </label>
 </div>

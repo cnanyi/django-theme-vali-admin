@@ -1,10 +1,8 @@
 {% load i18n static %}
 {% if cl.search_fields %}
-<div id="dj-toolbar" class="row">
+<div id="dj-toolbar">
     <form id="changelist-search" method="get">
         <div class="app-search"><!-- DIV needed for valid HTML -->
-            <label for="searchbar1">查找</label>
-
             <input type="text" class="app-search__input" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar1" autofocus />
             <button type="button" class="app-search__button"><i class="fa fa-search"></i></button>
             {% if show_result_count %}
