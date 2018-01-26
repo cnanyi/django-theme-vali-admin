@@ -24,6 +24,9 @@
 {% endblock %}
 
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
+{% block appheader %} {% endblock %}
+{% block aside %}{% endblock %}
+
 {% block breadcrumbs %}
      {% block search %}{% search_form cl %}{% endblock %}
 <ul class="app-breadcrumb breadcrumb side">
@@ -39,9 +42,9 @@
               {% block object-tools-items %}
                 {% if has_add_permission %}
                   {% url cl.opts|admin_urlname:'add' as add_url %}
-                  <button href="{% add_preserved_filters add_url is_popup to_field %}"  class="btn btn-primary btn-sm" type="button">
+                  <a href="{% add_preserved_filters add_url is_popup to_field %}"  class="btn btn-primary btn-sm" type="button">
                     {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-                  </button>
+                  </a>
                 {% endif %}
               {% endblock %}
             </div>
@@ -70,11 +73,7 @@
   <div class="tile">
 
     <div class="col-md-12">
-
-
-
           {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
-
       <form id="changelist-form" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
       {% if cl.formset %}
         <div>{{ cl.formset.management_form }}</div>

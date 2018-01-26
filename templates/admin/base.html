@@ -44,6 +44,7 @@
 <div id="container">
     {% if not is_popup %}
     <!-- Header -->
+    {% block appheader %}
     <div class="app-header">
         <div id="branding" class="app-header__logo" href="index.html">{% block branding %}{% endblock %}</div>
         <a class="app-sidebar__toggle" href="#" data-toggle="sidebar"></a>
@@ -115,6 +116,7 @@
 
         {% block nav-global %}{% endblock %}
     </div>
+    {% endblock %}
     <!-- END Header -->
 
     {% endif %}
@@ -147,7 +149,9 @@
                 {% for model in app.models %}
                     <li class="model-{{ model.object_name|lower }}">
                     {% if model.admin_url %}
-                        <a class="treeview-item" href="{{ model.admin_url }}"><i class="icon fa fa-circle-o"></i>{{ model.name }}</a>
+                        <!--<a class="treeview-item" href="{{ model.admin_url }}"><i class="icon fa fa-circle-o"></i>{{ model.name }}</a>-->
+                        <a href="javascript:addTab('{{ model.object_name }}', '{{ model.name }}','{{ model.admin_url }}', true);"><i
+                            class="treeview-item"></i>&nbsp;{{ model.name }}</a>
                     {% else %}
                         {{ model.name }}
                     {% endif %}
@@ -166,13 +170,13 @@
     </aside>
     {% endblock %}
     <!-- Content -->
-    <div id="content" class="app-content {% block coltype %}colM{% endblock %}">
+    <div id="content" class="{% block coltype %}app-content colM{% endblock %}">
 
         {% block pretitle %}{% endblock %}
 
         {% block content_title %}
         <div class="app-title">
-            {% if title %}<div><h1><i class="fa fa-th-list"></i>{% if cl %}{{ cl.opts.verbose_name_plural|capfirst }} {% endif %}</h1> <p>{{ title }}</p></div>{% endif %}
+            {% if title %}<div><h1><i class="fa fa-th-list"></i>{% if cl %}{{ cl.opts.verbose_name_plural|capfirst }} {% else %} {{ opts.verbose_name_plural|capfirst }} {% endif %}</h1> <p>{{ title }}</p></div>{% endif %}
             {% block breadcrumbs %}{% endblock %}
         </div>
         {% endblock %}

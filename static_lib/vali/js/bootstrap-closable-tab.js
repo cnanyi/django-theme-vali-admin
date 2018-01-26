@@ -5,7 +5,7 @@ var closableTab = {
     frameHeight: 400,
 	//frame加载完成后设置父容器的高度，使iframe页面与父页面无缝对接
 	frameLoad:function (frame){
-        $(frame).parent().height(this.frameHeight-40);
+       // $(frame).parent().height($("#content").height() -40);
 	},
     //添加tab
 	addTab:function(tabItem, change_callback){ //tabItem = {id,name,url,closable}  change_callback在标签更改时执行
@@ -15,7 +15,7 @@ var closableTab = {
 		$("div[id^=tab_container_]").removeClass("active");
 		var needloadtab = false;
 		if(!$('#'+id)[0]){
-			var li_tab = '<li role="presentation" class="" id="'+id+'"><a href="#'+container+'"  role="tab" data-toggle="tab" style="position: relative">'+tabItem.name;
+			var li_tab = '<li class="nav-item" id="'+id+'"><a href="#'+container+'" class="nav-link" data-toggle="tab" style="position: relative">'+tabItem.name;
 			if(tabItem.closable){
 				li_tab = li_tab + '<i class="glyphicon glyphicon-remove small" tabclose="'+id+'" style="left: 5px"  onclick="closableTab.closeTab(this)"></i></a></li> ';
 			}else{

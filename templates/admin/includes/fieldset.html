@@ -1,5 +1,5 @@
-<fieldset class="module aligned {{ fieldset.classes }}">
-    {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+<fieldset class="tile module aligned {{ fieldset.classes }}">
+    {% if fieldset.name %}<div class="row"><div class="col-lg-12"><div class="page-header"><h5 class="mb-3 line-head">{{ fieldset.name }}</h5></div></div></div>{% endif %}
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
