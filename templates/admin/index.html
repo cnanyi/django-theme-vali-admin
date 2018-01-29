@@ -46,16 +46,16 @@ function getCookie(c_name)
 {% endblock %}
 {% block coltype %}{{ block.super }}{% endblock %}
 
-{% block bodyclass %}{{ block.super }}dashboard{% endblock %}
+{% block bodyclass %}{{ block.super }}app sidebar-mini pace-done dashboard{% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
 {% block content_title %}{% endblock %}
 {% block content %}
-<div id="content-main">
-<div id="pages" class="bs-component" role="tabpanel">
-    <ul class="nav nav-tabs">
+<div id="content-main" >
+<div id="pages" class="card text-white bg-light" role="tabpanel">
+    <ul class="nav nav-tabs" style="position:fixed;width:100%">
     </ul>
-    <div class="tab-content">
+    <div class="tab-content" style="margin-top:40px">
     </div>
 </div>
 </div>

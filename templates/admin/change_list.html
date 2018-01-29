@@ -21,19 +21,27 @@
 {% block extrahead %}
 {{ block.super }}
 {{ media.js }}
+<script>
+function IFrameResize(){
+var obj = parent.document.getElementById("tab_frame_{{ opts.model_name }}");
+var obj1 = parent.document.getElementById("content");
+obj.height = Math.max(this.document.body.scrollHeight, obj1.clientHeight - 40);
+}
+</script>
 {% endblock %}
 
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
+{% block bodyonload%}IFrameResize(){% endblock %}
 {% block appheader %} {% endblock %}
 {% block aside %}{% endblock %}
 
 {% block breadcrumbs %}
      {% block search %}{% search_form cl %}{% endblock %}
-<ul class="app-breadcrumb breadcrumb side">
+<!--<ul class="app-breadcrumb breadcrumb side">
   <li class="breadcrumb-item"><a href="{% url 'admin:index' %}"><i class="fa fa-home fa-lg"></i></a></li>
   <li class="breadcrumb-item"><a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a></li>
   <li class="breadcrumb-item">{{ cl.opts.verbose_name_plural|capfirst }}</li>
-</ul>
+</ul>-->
 {% endblock %}
 {% block coltype %}flex{% endblock %}
 {% block content %}

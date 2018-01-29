@@ -498,8 +498,8 @@ input[type=button][disabled].default {
 }
 
 .module p, .module ul, .module h3, .module h4, .module dl, .module pre {
-    padding-left: 10px;
-    padding-right: 10px;
+    /*padding-left: 10px;
+    padding-right: 10px;*/
 }
 
 .module blockquote {
@@ -507,7 +507,7 @@ input[type=button][disabled].default {
 }
 
 .module ul, .module ol {
-    margin-left: 1.5em;
+    /*margin-left: 1.5em;*/
 }
 
 .module h3 {

@@ -11,13 +11,13 @@ var closableTab = {
 	addTab:function(tabItem, change_callback){ //tabItem = {id,name,url,closable}  change_callback在标签更改时执行
 		var id = "tab_seed_" + tabItem.id;
 		var container ="tab_container_" + tabItem.id;
-		$("li[id^=tab_seed_]").removeClass("active");
-		$("div[id^=tab_container_]").removeClass("active");
+		$(".nav-link").removeClass("active").attr("aria-expanded", false);
+		$(".tab-pane").removeClass("active").removeClass("show").attr("aria-expanded", false);
 		var needloadtab = false;
 		if(!$('#'+id)[0]){
-			var li_tab = '<li class="nav-item" id="'+id+'"><a href="#'+container+'" class="nav-link" data-toggle="tab" style="position: relative">'+tabItem.name;
+			var li_tab = '<li class="nav-item" style="margin-left:1px" id="'+id+'"><a href="#'+container+'" class="nav-link active" aria-expanded="true" data-toggle="tab" style="position: relative">'+tabItem.name;
 			if(tabItem.closable){
-				li_tab = li_tab + '<i class="glyphicon glyphicon-remove small" tabclose="'+id+'" style="left: 5px"  onclick="closableTab.closeTab(this)"></i></a></li> ';
+				li_tab = li_tab + '<i class="fa fa-window-close" tabclose="'+id+'" style="margin-left:8px;margin-top:-4px;margin-right:-4px"  onclick="closableTab.closeTab(this)"></i></a></li> ';
 			}else{
 				li_tab = li_tab + '</a></li>';
 			}
@@ -29,14 +29,15 @@ var closableTab = {
 		    needloadtab = true;
 		}
 		if (needloadtab){
-            var tabpanel = '<div role="tabpanel" class="tab-pane" id="'+container+'" style="width: 100%;">'+
-                                  '<iframe src="'+tabItem.url+'" id="tab_frame_'+tabItem.id+'" frameborder="0" style="overflow-x: hidden; overflow-y: hidden;width:100%;height: 100%"  onload="closableTab.frameLoad(this)"></iframe>'+
+            var tabpanel = '<div role="tabpanel" class="tab-pane active show" aria-expanded="true" id="'+container+'" style="width: 100%;height:100%">'+
+                                  '<iframe src="'+tabItem.url+'" id="tab_frame_'+tabItem.id+'" frameborder="0" style="overflow-x: hidden; overflow-y: hidden;width:100%;height:'+($("#content").height() - 40)+'px"  onload="closableTab.frameLoad(this)"></iframe>'+
                                '</div>';
             $('.tab-content').append(tabpanel);
+		}else{
+		    $("#"+id).children().addClass("active").attr("aria-expanded", true);
+		    $("#"+container).addClass("active").addClass("show").attr("aria-expanded", true);
 		}
 
-		$("#"+id).addClass("active");
-		$("#"+container).addClass("active");
 		if (change_callback){
 		    change_callback($("#"+id));
 		}
@@ -52,7 +53,6 @@ var closableTab = {
 		var containerId = "tab_container_"+val.substring(9);
    	    if($('#'+containerId).hasClass('active')){
    	    	$('#'+val).prev().addClass('active');
-   	    	$('#'+containerId).prev().addClass('active');
    	    }
 		$("#"+val).remove();
 		$("#"+containerId).remove();
