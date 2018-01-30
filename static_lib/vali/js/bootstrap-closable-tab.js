@@ -30,7 +30,7 @@ var closableTab = {
 		}
 		if (needloadtab){
             var tabpanel = '<div role="tabpanel" class="tab-pane active show" aria-expanded="true" id="'+container+'" style="width: 100%;height:100%">'+
-                                  '<iframe src="'+tabItem.url+'" id="tab_frame_'+tabItem.id+'" frameborder="0" style="overflow-x: hidden; overflow-y: hidden;width:100%;height:'+($("#content").height() - 40)+'px"  onload="closableTab.frameLoad(this)"></iframe>'+
+                                  '<iframe src="'+tabItem.url+'" id="tab_frame_'+tabItem.id+'" frameborder="0" style="overflow-x: hidden; overflow-y: hidden;width:100%;" height="'+($("#content").height() - 40)+'"  onload="closableTab.frameLoad(this)"></iframe>'+
                                '</div>';
             $('.tab-content').append(tabpanel);
 		}else{

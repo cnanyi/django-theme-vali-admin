@@ -16,6 +16,9 @@
       #changelist table thead th:first-child {width: inherit}
     </style>
   {% endif %}
+<style>
+    body {background-color: #E5E5E5;}
+</style>
 {% endblock %}
 
 {% block extrahead %}
@@ -24,8 +27,8 @@
 <script>
 function IFrameResize(){
 var obj = parent.document.getElementById("tab_frame_{{ opts.model_name }}");
-var obj1 = parent.document.getElementById("content");
-obj.height = Math.max(this.document.body.scrollHeight, obj1.clientHeight - 40);
+var wh = parent.window.innerHeight || parent.document.body.clientHeight;
+obj.height = Math.max(this.document.body.clientHeight, wh - 90);
 }
 </script>
 {% endblock %}
@@ -37,11 +40,6 @@ obj.height = Math.max(this.document.body.scrollHeight, obj1.clientHeight - 40);
 
 {% block breadcrumbs %}
      {% block search %}{% search_form cl %}{% endblock %}
-<!--<ul class="app-breadcrumb breadcrumb side">
-  <li class="breadcrumb-item"><a href="{% url 'admin:index' %}"><i class="fa fa-home fa-lg"></i></a></li>
-  <li class="breadcrumb-item"><a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a></li>
-  <li class="breadcrumb-item">{{ cl.opts.verbose_name_plural|capfirst }}</li>
-</ul>-->
 {% endblock %}
 {% block coltype %}flex{% endblock %}
 {% block content %}
@@ -57,10 +55,10 @@ obj.height = Math.max(this.document.body.scrollHeight, obj1.clientHeight - 40);
               {% endblock %}
             </div>
     {% endblock %}
-  <div id="content-main">
+  <div id="content-main" style="background-color:#E5E5E5">
  {% block filters %}
               {% if cl.has_filters %}
-                <div id="changelist-filter1" class="tile" style="margin-bottom:5px;padding-top:8px;padding-bottom:1px;">
+                <div id="changelist-filter1" class="tile " style="margin-bottom:5px;padding-top:8px;padding-bottom:1px;">
                     <div class="row">
                   {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
                         </div>

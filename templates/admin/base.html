@@ -175,8 +175,10 @@
 
         {% block content_title %}
         <div class="app-title">
+
             {% if title %}<div><h1><i class="fa fa-th-list"></i>{% if cl %}{{ cl.opts.verbose_name_plural|capfirst }} {% else %} {{ opts.verbose_name_plural|capfirst }} {% endif %}</h1> <p>{{ title }}</p></div>{% endif %}
             {% block breadcrumbs %}{% endblock %}
+
         </div>
         {% endblock %}
 
