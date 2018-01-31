@@ -3,16 +3,16 @@
 <html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
 <title>{% block title %}{% endblock %}</title>
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'vali/css/main.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static '/font-awesome/4.7.0/css/font-awesome.min.css' %}" />
 {% block extrastyle %}{% endblock %}
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static 'admin/css/rtl.css' %}{% endblock %}" />{% endif %}
-{% block extrahead %}{% endblock %}
 {% block responsive %}
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}" />
-    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive_rtl.css' %}" />{% endif %}
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}" />
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive_rtl.css' %}" />{% endif %}
 {% endblock %}
 <style id="style-1-cropbar-clipper">
 /* Copyright 2014 Evernote Corporation. All rights reserved. */
@@ -28,32 +28,24 @@
     margin-left: 0px !important;
 }
 </style>
-{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+    {% block extrahead %}{% endblock %}
+
 </head>
 {% load i18n %}
 
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
-  data-admin-utc-offset="{% now 'Z' %}" onload="{% block bodyonload%}{% endblock %}">
-<div class="pace pace-inactive">
-    <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
-        <div class="pace-progress-inner"></div>
-    </div>
-    <div class="pace-activity"></div>
-</div>
-<!-- Container -->
-<div id="container">
-    {% if not is_popup %}
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" data-admin-utc-offset="{% now 'Z' %}" onload="{% block bodyonload%}{% endblock %}">
+{% if not is_popup %}
     <!-- Header -->
     {% block appheader %}
     <div class="app-header">
-        <div id="branding" class="app-header__logo" href="index.html">{% block branding %}{% endblock %}</div>
+        {% block branding %}{% endblock %}
         <a class="app-sidebar__toggle" href="#" data-toggle="sidebar"></a>
         <ul class="app-nav">
             {% block appsearch %}
-        <li class="app-search">
-          <input class="app-search__input" type="search" placeholder="{% trans 'Search' %}">
-          <button class="app-search__button"><i class="fa fa-search"></i></button>
-        </li>
+            <li class="app-search">
+              <input class="app-search__input" type="search" placeholder="{% trans 'Search' %}">
+              <button class="app-search__button"><i class="fa fa-search"></i></button>
+            </li>
             {% endblock %}
         <!--Notification Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o fa-lg"></i></a>
@@ -97,29 +89,36 @@
           </ul>
         </li>
         <!-- User Menu-->
-            {% block usertools %}
+         {% block usertools %}
             {% if has_permission %}
-            {% block userlinks %}
-            <li id="user-tools" class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
-                <ul class="dropdown-menu settings-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-117px, 50px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    {% if site_url %} <li><a class="dropdown-item" href="{{ site_url }}"><i class="fa fa-cog fa-lg"></i> {% trans 'View site' %} </a></li>{% endif %}
-                    {% if user.has_usable_password %}<li><a class="dropdown-item" href="{% url 'admin:password_change' %}"><i class="fa fa-user fa-lg"></i> {% trans 'Change password' %} </a></li>{% endif %}
-                    {% if user.is_active and user.is_staff %}{% url 'django-admindocs-docroot' as docsroot %}{% if docsroot %}<li><a class="dropdown-item" href="{{ docsroot }}"><i class="fa fa-user fa-lg"></i>{% trans 'Documentation' %}</a></li>{% endif %} {% endif %}
-                    <li><a class="dropdown-item" href="{% url 'admin:logout' %}"><i class="fa fa-sign-out fa-lg"></i>{% trans 'Log out' %}</a></li>
-                </ul>
-            </li>
-            {% endblock %}
+                {% block userlinks %}
+                <li id="user-tools" class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
+                    <ul class="dropdown-menu settings-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-117px, 50px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        {% if site_url %}
+                        <li><a class="dropdown-item" href="{{ site_url }}"><i class="fa fa-cog fa-lg"></i> {% trans 'View site' %} </a></li>
+                        {% endif %}
+                        {% if user.has_usable_password %}
+                        <li><a class="dropdown-item" href="{% url 'admin:password_change' %}"><i class="fa fa-user fa-lg"></i> {% trans 'Change password' %} </a></li>
+                        {% endif %}
+                        {% if user.is_active and user.is_staff %}{% url 'django-admindocs-docroot' as docsroot %}
+                            {% if docsroot %}
+                            <li><a class="dropdown-item" href="{{ docsroot }}"><i class="fa fa-user fa-lg"></i>{% trans 'Documentation' %}</a></li>
+                            {% endif %}
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url 'admin:logout' %}"><i class="fa fa-sign-out fa-lg"></i>{% trans 'Log out' %}</a></li>
+                    </ul>
+                </li>
+                {% endblock %}
             {% endif %}
-            {% endblock %}
+         {% endblock %}
       </ul>
-
-
         {% block nav-global %}{% endblock %}
     </div>
     {% endblock %}
     <!-- END Header -->
-
-    {% endif %}
+{% endif %}
+<!-- Container -->
+<div id="container">
 
     {% block messages %}
         {% if messages %}
@@ -130,126 +129,72 @@
     {% endblock messages %}
     {% block aside %}
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><i class="app-sidebar__user-avatar fa fa-user fa-lg"></i>
-        <div>
-          <p class="app-sidebar__user-name">{% firstof user.get_short_name user.get_username %}</p>
-          <p class="app-sidebar__user-designation"></p>
+        <div class="app-sidebar__user"><i class="app-sidebar__user-avatar fa fa-user fa-lg"></i>
+            <div>
+                <p class="app-sidebar__user-name">{% firstof user.get_short_name user.get_username %}</p>
+                <p class="app-sidebar__user-designation"></p>
+            </div>
         </div>
-      </div>
-      <ul class="app-menu">
+        <ul class="app-menu">
         <li><a class="app-menu__item" href="/admin/"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-{% if app_list %}
-    {% for app in app_list %}
+        {% if app_list %}
+        {% for app in app_list %}
         <div class="app-{{ app.app_label }} module">
-
-        <li class="treeview">
-            <a href="{{ app.app_url }}" class="app-menu__item" data-toggle="treeview" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">
-                <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">{{ app.name }}</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                {% for model in app.models %}
-                    <li class="model-{{ model.object_name|lower }}">
-                    {% if model.admin_url %}
-                        <!--<a class="treeview-item" href="{{ model.admin_url }}"><i class="icon fa fa-circle-o"></i>{{ model.name }}</a>-->
-                        <a class="treeview-item" href="javascript:addTab('{{ model.object_name|lower }}', '{{ model.name }}','{{ model.admin_url }}', true);"><i class="icon fa fa-circle-o"></i>&nbsp;{{ model.name }}</a>
-                    {% else %}
-                        {{ model.name }}
-                    {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
-
-
+            <li class="treeview">
+                <a href="{{ app.app_url }}" class="app-menu__item" data-toggle="treeview" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">
+                    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">{{ app.name }}</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    {% for model in app.models %}
+                        <li class="model-{{ model.object_name|lower }}">
+                        {% if model.admin_url %}
+                            <!--<a class="treeview-item" href="{{ model.admin_url }}"><i class="icon fa fa-circle-o"></i>{{ model.name }}</a>-->
+                            <a class="treeview-item" href="javascript:addTab('{{ model.object_name|lower }}', '{{ model.name }}','{{ model.admin_url }}', true);"><i class="icon fa fa-circle-o"></i>&nbsp;{{ model.name }}</a>
+                        {% else %}
+                            {{ model.name }}
+                        {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
         </div>
-    {% endfor %}
-{% else %}
-    <p>{% trans "You don't have permission to edit anything." %}</p>
-{% endif %}
-      </ul>
+        {% endfor %}
+        {% else %}
+        <p>{% trans "You don't have permission to edit anything." %}</p>
+        {% endif %}
+        </ul>
     </aside>
     {% endblock %}
     <!-- Content -->
     <div id="content" class="{% block coltype %}app-content colM{% endblock %}">
-
         {% block pretitle %}{% endblock %}
-
         {% block content_title %}
         <div class="app-title">
-
             {% if title %}<div><h1><i class="fa fa-th-list"></i>{% if cl %}{{ cl.opts.verbose_name_plural|capfirst }} {% else %} {{ opts.verbose_name_plural|capfirst }} {% endif %}</h1> <p>{{ title }}</p></div>{% endif %}
             {% block breadcrumbs %}{% endblock %}
-
+            <div class="card bg-primary">aaa</div>
         </div>
         {% endblock %}
 
         {% block content %}
-        {% block object-tools %}{% endblock %}
-        {{ content }}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
         {% endblock %}
         {% block sidebar %}{% endblock %}
         <br class="clear" />
     </div>
     <!-- END Content -->
-
     {% block footer %}<div id="footer"></div>{% endblock %}
 </div>
 <!-- END Container -->
 <!-- Javascripts-->
-    <!-- Essential javascripts for application to work-->
-    <script src="{% static 'vali/js/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'vali/js/popper.min.js' %}"></script>
-    <script src="{% static 'vali/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'vali/js/main.js' %}"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="{% static 'vali/js/plugins/pace.min.js' %}"></script>
-    <!-- Page specific javascripts-->
-    <script type="text/javascript" src="{% static 'vali/js/plugins/chart.js' %}"></script>
-    <script type="text/javascript">
-      var data = {
-      	labels: ["January", "February", "March", "April", "May"],
-      	datasets: [
-      		{
-      			label: "My First dataset",
-      			fillColor: "rgba(220,220,220,0.2)",
-      			strokeColor: "rgba(220,220,220,1)",
-      			pointColor: "rgba(220,220,220,1)",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(220,220,220,1)",
-      			data: [65, 59, 80, 81, 56]
-      		},
-      		{
-      			label: "My Second dataset",
-      			fillColor: "rgba(151,187,205,0.2)",
-      			strokeColor: "rgba(151,187,205,1)",
-      			pointColor: "rgba(151,187,205,1)",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(151,187,205,1)",
-      			data: [28, 48, 40, 19, 86]
-      		}
-      	]
-      };
-      var pdata = [
-      	{
-      		value: 300,
-      		color: "#46BFBD",
-      		highlight: "#5AD3D1",
-      		label: "Complete"
-      	},
-      	{
-      		value: 50,
-      		color:"#F7464A",
-      		highlight: "#FF5A5E",
-      		label: "In-Progress"
-      	}
-      ]
-
-      //var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-      //var lineChart = new Chart(ctxl).Line(data);
-
-      //var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-      //var pieChart = new Chart(ctxp).Pie(pdata);
-    </script>
+<!-- Essential javascripts for application to work-->
+<script src="{% static 'vali/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'vali/js/popper.min.js' %}"></script>
+<script src="{% static 'vali/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vali/js/main.js' %}"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="{% static 'vali/js/plugins/pace.min.js' %}"></script>
+<!-- Page specific javascripts-->
+<!--<script type="text/javascript" src="{% static 'vali/js/plugins/chart.js' %}"></script>-->
 </body>
 </html>

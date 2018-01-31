@@ -770,7 +770,7 @@ table#change-history tbody th {
 }
 
 #content {
-    padding: 20px 40px;
+    padding: 20px 20px;
 }
 
 .dashboard #content {
@@ -778,8 +778,8 @@ table#change-history tbody th {
 }
 
 #content-main {
-    float: left;
-    width: 100%;
+    /*float: left;*/
+    /*width: 100%;*/
 }
 
 #content-related {

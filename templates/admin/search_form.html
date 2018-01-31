@@ -3,7 +3,8 @@
 <div id="dj-toolbar">
     <form id="changelist-search" method="get">
         <div class="app-search"><!-- DIV needed for valid HTML -->
-            <input type="text" class="app-search__input" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar1" autofocus />
+            <label class="btn">查找:
+            <input type="text" class="app-search__input" size="23" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar1" autofocus />
             <button type="button" class="app-search__button"><i class="fa fa-search"></i></button>
             {% if show_result_count %}
                 <span class="small quiet">
@@ -24,6 +25,7 @@
             {% for pair in cl.params.items %}
                 {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endif %}
             {% endfor %}
+                </label>
         </div>
     </form>
 </div>
