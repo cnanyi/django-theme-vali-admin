@@ -168,7 +168,7 @@
     <div id="content" class="{% block coltype %}app-content colM{% endblock %}">
         {% block pretitle %}{% endblock %}
         {% block content_title %}
-        <div class="app-title">
+        <div class="app-title" style="margin: -20px -20px 20px;">
             {% if title %}<div><h1><i class="fa fa-th-list"></i>{% if cl %}{{ cl.opts.verbose_name_plural|capfirst }} {% else %} {{ opts.verbose_name_plural|capfirst }} {% endif %}</h1> <p>{{ title }}</p></div>{% endif %}
             {% block breadcrumbs %}{% endblock %}
         </div>
@@ -179,7 +179,7 @@
             {{ content }}
         {% endblock %}
         {% block sidebar %}{% endblock %}
-        <br class="clear" />
+        {% block content_clear %}<br class="clear" />{% endblock %}
     </div>
     <!-- END Content -->
     {% block footer %}<div id="footer"></div>{% endblock %}
@@ -190,10 +190,10 @@
 <script src="{% static 'vali/js/jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'vali/js/popper.min.js' %}"></script>
 <script src="{% static 'vali/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'vali/js/main.js' %}"></script>
+{% block footscript %}
+{% endblock %}
 <!-- The javascript plugin to display page loading on top-->
 <script src="{% static 'vali/js/plugins/pace.min.js' %}"></script>
 <!-- Page specific javascripts-->
-<!--<script type="text/javascript" src="{% static 'vali/js/plugins/chart.js' %}"></script>-->
 </body>
 </html>

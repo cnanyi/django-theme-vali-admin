@@ -1,17 +1,29 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
+{% block extrastyle %}{{ block.super }}
+<!--<link rel="stylesheet" type="text/css" href="{% static 'admin/css/login.css' %}" />-->
+<style>
+  #content {
+padding:0px;
+}
+</style>
 {{ form.media }}
 {% endblock %}
 
-{% block bodyclass %}{{ block.super }} login{% endblock %}
+{% block bodyclass %}{{ block.super }}{% endblock %}
 
+{%block appheader%}{% endblock %}
+{% block aside %}{% endblock %}
 {% block usertools %}{% endblock %}
-
+{% block coltype %}colM{% endblock %}
 {% block nav-global %}{% endblock %}
 
-{% block content_title %}{% endblock %}
+{% block content_title %}
+<section class="material-half-bg">
+  <div class="cover"></div>
+</section>
+{% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
 
@@ -30,8 +42,10 @@
 {% endfor %}
 {% endif %}
 
-<div id="content-main">
-
+<div id="content-main" class="login-content">
+<div class="logo">
+  <h1>{{ site_header|default:_('Django administration') }}</h1>
+</div>
 {% if user.is_authenticated %}
 <p class="errornote">
 {% blocktrans trimmed %}
@@ -40,27 +54,53 @@
 {% endblocktrans %}
 </p>
 {% endif %}
+<div class="login-box">
+  <form action="{{ app_path }}" method="post" id="login-form" class="login-form">{% csrf_token %}
+    <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>登录</h3>
+    <div class="form-group">
+      <label class="control-label" for="id_username">用户名:</label>
+      <input class="form-control" autofocus="" id="id_username" maxlength="254" name="username" type="text" required="" placeholder="请输入用户名">
+    </div>
+    <div class="form-group">
 
-<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
-  <div class="form-row">
-    {{ form.username.errors }}
-    {{ form.username.label_tag }} {{ form.username }}
-  </div>
-  <div class="form-row">
-    {{ form.password.errors }}
-    {{ form.password.label_tag }} {{ form.password }}
-    <input type="hidden" name="next" value="{{ next }}" />
-  </div>
-  {% url 'admin_password_reset' as password_reset_url %}
-  {% if password_reset_url %}
-  <div class="password-reset-link">
-    <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
-  </div>
-  {% endif %}
-  <div class="submit-row">
-    <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}" />
-  </div>
-</form>
 
+      <label class="control-label" for="id_password">密码:</label>
+      <input id="id_password" class="form-control" name="password" type="password" required="" placeholder="请输入密码">
+      <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+
+    {% url 'admin_password_reset' as password_reset_url %}
+    {% if password_reset_url %}
+        <div class="form-group">
+            <div class="utility">
+              <div class="animated-checkbox">
+                <label>
+                  <input type="checkbox"><span class="label-text">保持登录</span>
+                </label>
+              </div>
+              <p class="semibold-text mb-2"><a data-toggle="flip" href="{{ password_reset_url }}">忘记密码？</a></p>
+            </div>
+          </div>
+    {% endif %}
+    <div class="form-group btn-container">
+      <button type="submit" class="btn btn-primary btn-block" ><i class="fa fa-sign-in fa-lg fa-fw"></i>{% trans 'Log in' %}</button>
+    </div>
+  </form>
+  <form class="forget-form" action="index.html">
+          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+          <div class="form-group">
+            <label class="control-label">EMAIL</label>
+            <input class="form-control" type="text" placeholder="Email">
+          </div>
+          <div class="form-group btn-container">
+            <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+          </div>
+          <div class="form-group mt-3">
+            <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
+          </div>
+        </form>
+</div>
 </div>
 {% endblock %}
+{% block content_clear %}{% endblock %}
+{% block footer %}{% endblock %}

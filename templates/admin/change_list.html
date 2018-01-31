@@ -79,16 +79,16 @@
                     </div>
                     </div>
                 {% endblock %}
-            {% block search %}{% search_form cl %}{% endblock %}
-            {% block filters %}
-                {% if cl.has_filters %}
-                    <div id="changelist-filter1" class="row" style="margin-bottom:5px;padding-top:8px;padding-bottom:1px;">
-                        <div class="card col-md-12">
-                            {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+                {% block search %}{% search_form cl %}{% endblock %}
+                {% block filters %}
+                    {% if cl.has_filters %}
+                        <div id="changelist-filter1" class="row" style="margin-bottom:5px;padding-top:8px;padding-bottom:1px;">
+                            <div class="card col-md-12">
+                                {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+                            </div>
                         </div>
-                    </div>
-                {% endif %}
-            {% endblock %}
+                    {% endif %}
+                {% endblock %}
             </div>
         </div>
     </div>

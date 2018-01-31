@@ -2,10 +2,10 @@
 {% if cl.search_fields %}
 <div id="dj-toolbar" class="row" style="padding-top:8px">
     <form id="changelist-search" method="get">
-        <div class="card"><!-- DIV needed for valid HTML -->
+        <div class="col-md-12"><!-- DIV needed for valid HTML -->
             <span class="btn" style="width:100%;overflow:hidden;display:flex;text-align:left"><div style="margin-top:4px;width:60px;float:left">查找:</div>
-            <input type="text" placeholder="要查找的内容" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar1" autofocus style="width:100%"/>
-            <button type="submit" style="margin-left: -25px;margin-right:-5px;margin-bottom:6px;border: 0; color: rgba(0, 0, 0, 0.4);background:none;">
+            <input type="text" placeholder="查找" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar1" autofocus style="width:100%"/>
+            <button type="submit" style="margin-left: -25px;margin-right:-10px;margin-bottom:6px;border: 0; color: rgba(0, 0, 0, 0.4);background:none;">
                 <i class="fa fa-search"></i>
             </button>
             {% if show_result_count %}
