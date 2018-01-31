@@ -52,7 +52,13 @@ var closableTab = {
 		var val = $(item).attr('tabclose');
 		var containerId = "tab_container_"+val.substring(9);
    	    if($('#'+containerId).hasClass('active')){
-   	    	$('#'+val).prev().addClass('active');
+   	        if ($('#'+val).prev().length > 0){
+   	            $('#'+val).prev().children().addClass('active');
+   	    	    $('#'+containerId).prev().addClass("active").addClass("show");
+   	        }else if ($('#'+val).next().length > 0){
+                $('#'+val).next().children().addClass('active');
+                $('#'+containerId).next().addClass("active").addClass("show");
+   	        }
    	    }
 		$("#"+val).remove();
 		$("#"+containerId).remove();
