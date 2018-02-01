@@ -24,10 +24,4 @@
 	//Activate bootstrip tooltips
 	$("[data-toggle='tooltip']").tooltip();
 
-    $(".treeview-item").click(function(event) {
-        if(!$(this).hasClass("active")){
-            $(".treeview-item").removeClass("active");
-            $(this).toggleClass("active");
-        }
-    });
 })();
