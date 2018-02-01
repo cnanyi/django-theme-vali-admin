@@ -26,11 +26,13 @@
         var obj = parent.document.getElementById("tab_frame_{{ opts.model_name }}");
         var wh = parent.window.innerHeight || parent.document.body.clientHeight;
         obj.height = Math.max(this.document.body.clientHeight, wh - 90);
+        $(".app-title").css("top",parent.document.body.scrollTop+"px");
+        $(".formtoolbox").css("top",parent.document.body.scrollTop+"px");
     }
 </script>
 {% endblock %}
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
-{% block bodyonload%}IFrameResize(){% endblock %}
+{% block bodyevent %} onload="IFrameResize()" {% endblock %}
 {% block appheader %} {% endblock %}
 {% block aside %}{% endblock %}
 {% block breadcrumbs %}
@@ -63,10 +65,10 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="tile">
+            <div class="tile formtoolbox">
                 {% block object-tools %}
                 <div class="row">
-                    <div class="btn-group card col-md-12" style="padding:5px">
+                    <div class="btn-group-vertical col-md-12" >
                         {% block object-tools-items %}
                             {% if has_add_permission %}
                                 {% url cl.opts|admin_urlname:'add' as add_url %}

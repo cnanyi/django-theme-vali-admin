@@ -14,6 +14,17 @@ padding:0px;
 {{ block.super }}
 <script type="text/javascript" src="{% static 'vali/js/bootstrap-closable-tab.js' %}"></script>
 <script type="text/javascript">
+function bodyscroll(){
+    var activeframes = $(".tab-pane.active iframe");
+    var tp = document.body.scrollTop;
+    if (activeframes.length == 1) {
+        var content = activeframes[0].contentDocument;
+        var apptitle = content.getElementsByClassName("app-title");
+        var wintool = content.getElementsByClassName("formtoolbox");
+        $(apptitle).css("top", tp+"px");
+        $(wintool).css("top", tp+"px");
+    }
+};
 function addTab(id, name , url, canClose, reload=false){
     closableTab.addTab({'id':id,'name':name,'url':url,'closable':canClose, 'reload':reload}, change_callback);
 };
@@ -44,6 +55,7 @@ function getCookie(c_name)
 
 </script>
 {% endblock %}
+{% block bodyevent%}onscroll="bodyscroll()" {% endblock %}
 {% block coltype %}{{ block.super }}{% endblock %}
 
 {% block bodyclass %}{{ block.super }}app sidebar-mini pace-done dashboard{% endblock %}

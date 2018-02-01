@@ -8,6 +8,17 @@
         var obj = parent.document.getElementById("tab_frame_{{ opts.model_name }}");
         var wh = parent.window.innerHeight || parent.document.body.clientHeight;
         obj.height = Math.max(this.document.body.clientHeight+50, wh-40);
+        $(".app-title").css("top",parent.document.body.scrollTop+"px");
+        $(".formtoolbox").css("top",parent.document.body.scrollTop+"px");
+    }
+    function backtolistview(){
+        var loc = document.location.href;
+        loc = loc.replace(/(.+?\/)\d+\/change\/.*?(\?.+)?/, '$1$2');
+        loc = loc.replace(/(.+?\/)add\/.*?(\?.+)?/, '$1$2');
+        loc = loc.replace(/_changelist_filters=/, '');
+        loc = loc.replace(/%3D/g, '=');
+        loc = loc.replace(/%26/g, '&');
+        document.location.href = loc;
     }
     </script>
 {% endblock %}
@@ -20,7 +31,7 @@
 {% endblock %}
 {% block coltype %}colM{% endblock %}
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
-{% block bodyonload%}IFrameResize(){% endblock %}
+{% block bodyevent %} onload="IFrameResize()" {% endblock %}
 {% block appheader %} {% endblock %}
 {% block aside %}{% endblock %}
 <!--<ul class="app-breadcrumb breadcrumb side">-->
@@ -64,10 +75,10 @@
             </div>
             <div class="col-md-3">
                 {% block object-tools %}
-                    {% if change and show_history %}
+                    {% if change %}
                         {% if not is_popup %}
-                            <div class="tile">
-                                <div class="btn-group card col-md-12" style="padding:5px">
+                            <div class="tile formtoolbox">
+                                <div class="btn-group-vertical col-md-12">
                                 {% block object-tools-items %}
                                     {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
                                     <a href="{% add_preserved_filters history_url %}" class="historylink btn btn-primary ">{% trans "History" %}</a>
@@ -78,7 +89,7 @@
                         {% endif %}
                     {% endif %}
                 {% endblock %}
-                <div class="tile">
+                <div class="tile formtoolbox">
                     {% if save_on_top %}
                         {% block submit_buttons_top %}{% submit_row %}{% endblock %}
                     {% else %}

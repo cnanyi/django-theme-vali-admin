@@ -8,17 +8,11 @@
 {% endblock %}
 
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} delete-confirmation{% endblock %}
-
-{% block breadcrumbs %}
-<div class="breadcrumbs">
-<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
-&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
-&rsaquo; <a href="{% url opts|admin_urlname:'change' object.pk|admin_urlquote %}">{{ object|truncatewords:"18" }}</a>
-&rsaquo; {% trans 'Delete' %}
-</div>
-{% endblock %}
-
+{%block appheader%}{% endblock %}
+{% block aside %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block coltype %}colM{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
 {% if perms_lacking %}
     <p>{% blocktrans with escaped_object=object %}Deleting the {{ object_name }} '{{ escaped_object }}' would result in deleting related objects, but your account doesn't have permission to delete the following types of objects:{% endblocktrans %}</p>
@@ -44,8 +38,8 @@
     <input type="hidden" name="post" value="yes" />
     {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
     {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
-    <input type="submit" value="{% trans "Yes, I'm sure" %}" />
-    <a href="#" class="button cancel-link">{% trans "No, take me back" %}</a>
+    <input class="btn btn-danger" type="submit" value="{% trans 'Yes, I\'m sure' %}" style="background: #dc3545; border-radius: 0px; padding: 6px 12px; color: #fff;*/" />
+    <a href="javascript:history.back()" class="btn btn-secondary">{% trans "No, take me back" %}</a>
     </div>
     </form>
 {% endif %}
