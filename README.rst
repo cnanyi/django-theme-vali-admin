@@ -23,13 +23,12 @@ This section assumes your are running some debian like linux OS, your current di
 
 
 - Add `vali` to your `INSTALLED_APPS` setting like this:
-``` code:: sh
-INSTALLED_APPS = (
-	'vali',
-    'django.contrib.admin',
-	...
-)
-```
+.. code:: sh
+    INSTALLED_APPS = (
+        'vali',
+        'django.contrib.admin',
+        ...
+    )
 
 - Create your local_settings.py and put your database connection settings there. Then build django database:
 
