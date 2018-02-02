@@ -22,17 +22,19 @@
 {% endblock %}
 {% block extrahead %}{{ block.super }}{{ media.js }}
 <script>
-    function IFrameResize(){
+    function body_onload(){
         var obj = parent.document.getElementById("tab_frame_{{ opts.model_name }}");
-        var wh = parent.window.innerHeight || parent.document.body.clientHeight;
-        obj.height = Math.max(this.document.body.clientHeight, wh - 90);
-        $(".app-title").css("top",parent.document.body.scrollTop+"px");
-        $(".formtoolbox").css("top",parent.document.body.scrollTop+"px");
+        if (obj != null){
+            var wh = parent.window.innerHeight || parent.document.body.clientHeight;
+            obj.height = Math.max(this.document.body.clientHeight, wh - 90);
+            $(".app-title").css("top",parent.document.body.scrollTop+"px");
+            $(".formtoolbox").css("top",parent.document.body.scrollTop+"px");
+        }
     }
 </script>
 {% endblock %}
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
-{% block bodyevent %} onload="IFrameResize()" {% endblock %}
+{% block bodyevent %} onload="body_onload()" {% endblock %}
 {% block appheader %} {% endblock %}
 {% block aside %}{% endblock %}
 {% block breadcrumbs %}

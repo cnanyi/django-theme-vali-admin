@@ -4,35 +4,32 @@
 <head>
 <title>{% block title %}{% endblock %}</title>
     {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
-<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'vali/css/main.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static '/font-awesome/4.7.0/css/font-awesome.min.css' %}" />
-{% block extrastyle %}{% endblock %}
-{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static 'admin/css/rtl.css' %}{% endblock %}" />{% endif %}
-{% block responsive %}
-<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}" />
-{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive_rtl.css' %}" />{% endif %}
-{% endblock %}
-<style id="style-1-cropbar-clipper">
-/* Copyright 2014 Evernote Corporation. All rights reserved. */
-.en-markup-crop-options {
-    top: 18px !important;
-    left: 50% !important;
-    margin-left: -100px !important;
-    width: 200px !important;
-    border: 2px rgba(255,255,255,.38) solid !important;
-    border-radius: 4px !important;
-}
-.en-markup-crop-options div div:first-of-type {
-    margin-left: 0px !important;
-}
-</style>
+    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static 'admin/css/rtl.css' %}{% endblock %}" />{% endif %}
+    {% block responsive %}
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}" />
+    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive_rtl.css' %}" />{% endif %}
+    {% endblock %}
+    <!--<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}" />-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vali/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/font-awesome/4.7.0/css/font-awesome.min.css' %}" />
+    <style>
+    #content {padding:20px 20px;}
+    input, textarea, select, .form-row p, form .button {vertical-align: middle;}
+    select { height: 30px;border-radius: 4px; padding: 5px 6px;}
+    thead th { padding: 5px 10px; line-height: normal;text-transform: uppercase;background: #f6f6f6;}
+    thead th, tfoot td { color: #666; font-size: 11px;  border: none;  border-top: 1px solid #eee;  border-bottom: 1px solid #eee;}
+    th { font-weight: 600;}
+    table thead th .text a { display: block;  cursor: pointer;   padding: 8px 10px;}
+    td, th { font-size: 13px; padding: 8px;  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;}
+    input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField {
+    border: 1px solid #ccc;    border-radius: 4px;    padding: 5px 6px;    margin-top: 0;}
+    .module h2, .module caption, .inline-group h2 {    margin: 0;    padding: 8px;    font-weight: 400;    font-size: 13px;    text-align: left;    background: #79aec8;    color: #fff;}
+    </style>
+    {% block extrastyle %}{% endblock %}
     {% block extrahead %}{% endblock %}
-
 </head>
 {% load i18n %}
-
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" data-admin-utc-offset="{% now 'Z' %}" {% block bodyevent %}{% endblock %}>
 {% if not is_popup %}
     <!-- Header -->
@@ -137,7 +134,7 @@
             </div>
         </div>
         <ul class="app-menu">
-        <li><a class="app-menu__item" href="/admin/"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item" href="/admin/"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{% trans 'Home' %}</span></a></li>
         {% if app_list %}
         {% for app in app_list %}
         <div class="app-{{ app.app_label }} module">
