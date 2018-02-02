@@ -23,12 +23,13 @@ This section assumes your are running some debian like linux OS, your current di
 
 
 - Add `vali` to your `INSTALLED_APPS` setting like this:
-.. code:: sh
+``` code:: sh
 INSTALLED_APPS = (
-	'vali'
+	'vali',
+    'django.contrib.admin',
 	...
 )
-
+```
 
 - Create your local_settings.py and put your database connection settings there. Then build django database:
 
@@ -45,3 +46,6 @@ INSTALLED_APPS = (
 .. _`Django`: http://djangoproject.com/
 .. _`Vali Admin`: https://github.com/pratikborsadiya/vali-admin
 
+## License
+
+This project is licensed under the [MIT](LICENSE) License
