@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-vali',
-    version='0.0.1',
+    version='0.1.0',
     description=(
         'a django admin theme using vali-admin'
     ),
@@ -15,25 +15,31 @@ setup(
     maintainer='cnanyi',
     maintainer_email='cnanyi@gmail.com',
     license='MIT License',
-    packages=find_packages('vali'),
+    packages=['vali'],
+    include_package_data=True, 
     platforms=["all"],
     url='https://github.com/cnanyi/django-vali',
+    py_modules=['vali'],
     classifiers=[
-        'Development Status :: 0 - Beta',
-        'Operating System :: OS Independent',
+        'Development Status :: 3 - Alpha',
+
+        # Supported versions of Django
+        'Framework :: Django',
+        'Framework :: Django :: 1.10',
+        'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
+
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
+        'Natural Language :: English',
+
+        # Supported versions of Python
         'Programming Language :: Python',
-        'Programming Language :: Python :: Implementation',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'Topic :: Software Development :: Libraries'
     ],
-    install_requires=[
-        'Django >= 1.10'
-    ]
 )
