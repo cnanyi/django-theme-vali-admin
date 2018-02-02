@@ -16,18 +16,19 @@ How to use
 This section assumes your are running some debian like linux OS, your current directory is a project root
 
 - Add `vali` to your `INSTALLED_APPS` setting like this:
-```Python
+
+::
     INSTALLED_APPS = (
         'vali',
         'django.contrib.admin',
         ...
     )
-```
+
 - Create your local_settings.py and put your database connection settings there. Then build django database:
 
-```sh
+::
     $ ./manage.py runserver
-```
+
 - Point your browser to http://localhost:8000
 
 
