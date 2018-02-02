@@ -12,12 +12,13 @@ django >= 1.10
 
 How to use
 ----------
-
-This section assumes your are running some debian like linux OS, your current directory is a project root
+- Install with pip
+code ::
+    $ pip install django-vali
 
 - Add `vali` to your `INSTALLED_APPS` setting like this:
 
-::
+code ::
     INSTALLED_APPS = (
         'vali',
         'django.contrib.admin',
@@ -26,7 +27,7 @@ This section assumes your are running some debian like linux OS, your current di
 
 - Create your local_settings.py and put your database connection settings there. Then build django database:
 
-::
+code ::
     $ ./manage.py runserver
 
 - Point your browser to http://localhost:8000
