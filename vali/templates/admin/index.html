@@ -77,5 +77,8 @@ function getCookie(c_name)
 {% block footer %}{% endblock %}
 {% block footscript %}
 <script src="{% static 'vali/js/main.js' %}"></script>
+<script>
+    addTab('dashboard', '{% trans "Home" %}', '/vali/dashboard/', false);
+</script>
 <!--<script type="text/javascript" src="{% static 'vali/js/plugins/chart.js' %}"></script>-->
 {% endblock %}
