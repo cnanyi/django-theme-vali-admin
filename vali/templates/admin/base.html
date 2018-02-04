@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'vali/css/main.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static '/font-awesome/4.7.0/css/font-awesome.min.css' %}" />
     <style>
+    body {background-color: #E5E5E5;}
     #content {padding:20px 20px;}
     input, textarea, select, .form-row p, form .button {vertical-align: middle;}
     select { height: 30px;border-radius: 4px; padding: 5px 6px;}
@@ -114,17 +115,41 @@
     {% endblock %}
     <!-- END Header -->
 {% endif %}
+{% block pretitle %}{% endblock %}
+{% block content_title %}
+<div class="app-title" style="margin: 0px 0px;position:relative;z-index:1020;padding:10px">
+    {% if title %}
+        <div>
+            {% if cl %}
+            <h1><i class="fa fa-th-list"></i>
+                {{ cl.opts.verbose_name_plural|capfirst }}
+            </h1>
+            {% else %}
+                <a class="btn btn-outline-info" href="javascript:backtolistview()">
+                    <i class="fa fa-chevron-left"></i>
+                返回【{{ opts.verbose_name_plural|capfirst }}】列表
+                </a>
+            {% endif %}
+
+            {# <p>{{ title }}</p> #}
+        </div>
+    {% endif %}
+    {% block breadcrumbs %}{% endblock %}
+</div>
+{% endblock %}
+{% block messages %}
+    {% if messages %}
+    <ul class="alert alert-dismissible alert-info" style="list-style:none">
+        <button class="close" type="button" data-dismiss="alert">×</button>
+        {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+    {% endfor %}</ul>
+    {% endif %}
+{% endblock messages %}
 <!-- Container -->
 <div id="container">
 
-    {% block messages %}
-        {% if messages %}
-        <ul class="messagelist">
-            {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-        {% endfor %}</ul>
-        {% endif %}
-    {% endblock messages %}
+
     {% block aside %}
     <aside class="app-sidebar">
         <div class="app-sidebar__user"><i class="app-sidebar__user-avatar fa fa-user fa-lg"></i>
@@ -164,28 +189,6 @@
     {% endblock %}
     <!-- Content -->
     <div id="content" class="{% block coltype %}app-content colM{% endblock %}">
-        {% block pretitle %}{% endblock %}
-        {% block content_title %}
-        <div class="app-title" style="margin: -20px -20px 20px;position:relative;z-index:1020;padding:10px 20px">
-            {% if title %}
-                <div>
-                    {% if cl %}
-                    <h1>
-                        {{ cl.opts.verbose_name_plural|capfirst }}
-                    </h1>
-                    {% else %}
-                        <a class="btn btn-outline-info" href="javascript:backtolistview()">
-                            <i class="fa fa-chevron-left"></i>
-                        返回{{ opts.verbose_name_plural|capfirst }}列表
-                        </a>
-                    {% endif %}
-
-                    <p>{{ title }}</p>
-                </div>
-            {% endif %}
-            {% block breadcrumbs %}{% endblock %}
-        </div>
-        {% endblock %}
 
         {% block content %}
             {% block object-tools %}{% endblock %}

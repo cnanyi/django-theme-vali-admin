@@ -19,7 +19,7 @@ function bodyscroll(){
         var content = activeframes[0].contentDocument;
         var apptitle = content.getElementsByClassName("app-title");
         var wintool = content.getElementsByClassName("formtoolbox");
-        $(apptitle).css("top", tp+"px");
+        $(apptitle).css("top", (tp-2)+"px");
         $(wintool).css("top", tp+"px");
     }
 };
