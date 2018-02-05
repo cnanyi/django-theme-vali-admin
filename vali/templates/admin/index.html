@@ -57,8 +57,11 @@ function getCookie(c_name)
 {% block coltype %}{{ block.super }}{% endblock %}
 <!-- Header -->
     {% block appheader %}
+
     <div class="app-header">
-        {% block branding %}{% endblock %}
+        {% block branding %}
+        <a id="branding" class="app-header__logo" href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a>
+        {% endblock %}
         <a class="app-sidebar__toggle" href="#" data-toggle="sidebar"></a>
         <ul class="app-nav">
             {% block appsearch %}
