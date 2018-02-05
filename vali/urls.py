@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import DashboardView
+from .views import ValiDashboardView
 urlpatterns = [
-    url('^dashboard/', DashboardView.as_view())
+    url('^dashboard/', ValiDashboardView.as_view())
 ]

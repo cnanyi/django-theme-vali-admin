@@ -26,6 +26,10 @@ function bodyscroll(){
 function addTab(id, name , url, canClose, reload=false){
     closableTab.addTab({'id':id,'name':name,'url':url,'closable':canClose, 'reload':reload}, change_callback);
 };
+// todo: need add this method
+function closeTab(item) {
+    closableTab.closeTab(item);
+}
 function change_callback(self){
     //$("#site-name a").text('远程专家会诊平台 - ' + self.find('a').text());
 };
@@ -64,12 +68,12 @@ function getCookie(c_name)
         {% endblock %}
         <a class="app-sidebar__toggle" href="#" data-toggle="sidebar"></a>
         <ul class="app-nav">
-            {% block appsearch %}
-            <li class="app-search">
-              <input class="app-search__input" type="search" placeholder="{% trans 'Search' %}">
-              <button class="app-search__button"><i class="fa fa-search"></i></button>
-            </li>
-            {% endblock %}
+            <!--{% block appsearch %}-->
+            <!--<li class="app-search">-->
+              <!--<input class="app-search__input" type="search" placeholder="{% trans 'Search' %}">-->
+              <!--<button class="app-search__button"><i class="fa fa-search"></i></button>-->
+            <!--</li>-->
+            <!--{% endblock %}-->
         <!--Notification Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o fa-lg"></i></a>
           <ul class="app-notification dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-222px, 50px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -198,7 +202,7 @@ function getCookie(c_name)
 {% block footscript %}
 <script src="{% static 'vali/js/main.js' %}"></script>
 <script>
-    addTab('dashboard', '{% trans "Home" %}', '/vali/dashboard/', false,true);
+    addTab('dashboard', '{% trans "Home" %}', '/admin/vali/dashboard/', false, true);
 </script>
 <!--<script type="text/javascript" src="{% static 'vali/js/plugins/chart.js' %}"></script>-->
 {% endblock %}
