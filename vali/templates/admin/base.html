@@ -28,7 +28,9 @@
     .module h2, .module caption, .inline-group h2 {    margin: 0;    padding: 8px;    font-weight: 400;    font-size: 13px;    text-align: left;    background: #79aec8;    color: #fff;}
     </style>
     {% block extrastyle %}{% endblock %}
-    {% block extrahead %}{% endblock %}
+    {% block extrahead %}
+    <!--<script src="{% static 'vali/js/jquery-3.2.1.min.js' %}"></script>-->
+    {% endblock %}
 </head>
 {% load i18n %}
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" data-admin-utc-offset="{% now 'Z' %}" {% block bodyevent %}{% endblock %}>
@@ -87,8 +89,8 @@
 </div>
 <!-- END Container -->
 <!-- Javascripts-->
-<!-- Essential javascripts for application to work-->
 <script src="{% static 'vali/js/jquery-3.2.1.min.js' %}"></script>
+<!-- Essential javascripts for application to work-->
 <script src="{% static 'vali/js/popper.min.js' %}"></script>
 <script src="{% static 'vali/js/bootstrap.min.js' %}"></script>
 {% block footscript %} {% endblock %}

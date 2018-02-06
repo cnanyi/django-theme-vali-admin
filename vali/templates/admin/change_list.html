@@ -83,6 +83,7 @@
                     </div>
                 {% endblock %}
             </div>
+            {% if cl.has_filters or cl.search_fields %}
             <div class="tile formtoolbox">
                 {% block search %}{% search_form cl %}{% endblock %}
                 {% block filters %}
@@ -95,6 +96,7 @@
                     {% endif %}
                 {% endblock %}
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
