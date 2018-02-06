@@ -9,6 +9,7 @@ var closableTab = {
 	},
     //添加tab
 	addTab:function(tabItem, change_callback){ //tabItem = {id,name,url,closable}  change_callback在标签更改时执行
+		//function change_callback(self){};
 		var id = "tab_seed_" + tabItem.id;
 		var container ="tab_container_" + tabItem.id;
 		$(".nav-link").removeClass("active").attr("aria-expanded", false);
