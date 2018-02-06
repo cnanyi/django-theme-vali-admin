@@ -1,10 +1,9 @@
 {% load i18n %}
 
 <label class="btn" style="text-align:left;margin-bottom:0px">{% blocktrans with filter_title=title %} {{ filter_title }}: {% endblocktrans %}
-<select>
-{% for choice in choices %}
-    <option {% if choice.selected %}class="selected"{% endif %}>
-    <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a></option>
-{% endfor %}
-</select>
-    </label>
+    <select onchange="filter_changed(this)">
+    {% for choice in choices %}
+        <option {% if choice.selected %}selected="selected"{% endif %} value="{{ choice.query_string|iriencode }}">{{ choice.display }}</option>
+    {% endfor %}
+    </select>
+</label>

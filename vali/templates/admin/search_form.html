@@ -1,14 +1,14 @@
 {% load i18n static %}
 {% if cl.search_fields %}
 <div id="dj-toolbar" class="row" style="padding-top:8px">
-    <form id="changelist-search" method="get">
+    <form id="changelist-search" class="form-horizontal col-md-12" method="get" style="padding-left:0px">
         <div class="col-md-12"><!-- DIV needed for valid HTML -->
             <span class="btn" style="width:100%;overflow:hidden;display:flex;text-align:left"><div style="margin-top:4px;width:60px;float:left">查找:</div>
-            <input type="text" placeholder="查找" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar1" autofocus style="width:100%"/>
+            <input type="text" placeholder="查找" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar1" autofocus class="form-control"/>
             <button type="submit" style="margin-left: -25px;margin-right:-10px;margin-bottom:6px;border: 0; color: rgba(0, 0, 0, 0.4);background:none;">
                 <i class="fa fa-search"></i>
             </button>
-            {% if show_result_count %}
+            {% if False and show_result_count %}
                 <span class="small quiet">
                     {% blocktrans count counter=cl.result_count %}
                     {{ counter }} result{% plural %}{{ counter }} results

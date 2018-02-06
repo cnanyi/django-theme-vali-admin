@@ -28,6 +28,9 @@
             $(".formtoolbox").css("top",parent.document.body.scrollTop+"px");
         }
     }
+    function filter_changed(obj){
+        window.location.href = $(obj).val();
+    }
 </script>
 {% endblock %}
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
@@ -39,7 +42,6 @@
 {% endblock %}
 {% block coltype %}flex{% endblock %}
 {% block content %}
-
     <div id="content-main" class="row" style="background-color:#E5E5E5">
         {% if cl.formset.errors %}
             <p class="errornote">
@@ -80,6 +82,8 @@
                     </div>
                     </div>
                 {% endblock %}
+            </div>
+            <div class="tile formtoolbox">
                 {% block search %}{% search_form cl %}{% endblock %}
                 {% block filters %}
                     {% if cl.has_filters %}
