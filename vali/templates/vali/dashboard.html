@@ -1,6 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_urls static admin_modify %}
 {% block content_title %}{% endblock %}
+{% block title %}Dashboard{% endblock %}
 {% block coltype %}colM{% endblock %}
 {% block content %}
 <div class="row">
@@ -17,71 +18,35 @@
 
       </div>
 <div class="row">
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">line chart</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="lineChartDemo" width="504" height="284" style="width: 504px; height: 284px;"></canvas>
-            </div>
-          </div>
+    {% for chart in charts %}
+    <div class="col-md-6">
+      <div class="tile">
+        <h3 class="tile-title">{{ chart.title }}</h3>
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="{{ chart.name }}" width="504" height="284" style="width: 504px; height: 284px;"></canvas>
         </div>
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">pie chart</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="pieChartDemo" width="504" height="284" style="width: 504px; height: 284px;"></canvas>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+    {% endfor %}
       </div>
 {% endblock %}
 {% block footscript %}
 <script type="text/javascript" src="{% static 'vali/js/plugins/chart.js' %}"></script>
     <script type="text/javascript">
-      var data = {
-      	labels: ["2018-03-01", "2018-03-02", "2018-03-03", "2018-03-04", "2018-03-05"],
-      	datasets: [
-      		{
-      			label: "dataset 1",
-      			fillColor: "rgba(220,220,220,0.2)",
-      			strokeColor: "rgba(220,220,220,1)",
-      			pointColor: "rgba(220,220,220,1)",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(220,220,220,1)",
-      			data: [65, 59, 80, 81, 80]
-      		},
-      		{
-      			label: "dataset 2",
-      			fillColor: "rgba(151,187,205,0.2)",
-      			strokeColor: "rgba(151,187,205,1)",
-      			pointColor: "rgba(151,187,205,1)",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(151,187,205,1)",
-      			data: [28, 48, 40, 19, 69]
-      		}
-      	]
-      };
-      var pdata = [
-      	{
-      		value: 300,
-      		color: "#46BFBD",
-      		highlight: "#5AD3D1",
-      		label: "影像"
-      	},
-      	{
-      		value: 50,
-      		color:"#F7464A",
-      		highlight: "#FF5A5E",
-      		label: "病理"
-      	}
-      ]
+    {% for chart in charts %}
+        {% if chart.type == "Line" %}
+            var data = {
+            labels: {{ chart.labels|safe }},
+            datasets: {{ chart.datasets|safe }}
+             };
+         var ctxl = $("#{{ chart.name }}").get(0).getContext("2d");
+         var lineChart = new Chart(ctxl).Line(data);
 
-      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-      var lineChart = new Chart(ctxl).Line(data);
-
-      var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-      var pieChart = new Chart(ctxp).Pie(pdata);
+        {% elif chart.type == "Pie" %}
+            var pdata = {{ chart.datasets|safe }}
+             var ctxp = $("#{{ chart.name }}").get(0).getContext("2d");
+             var pieChart = new Chart(ctxp).Pie(pdata);
+        {% endif %}
+    {% endfor %}
     </script>
 {% endblock %}

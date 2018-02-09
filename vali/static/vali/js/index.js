@@ -23,7 +23,7 @@
 
 	//Activate bootstrip tooltips
 	$("[data-toggle='tooltip']").tooltip();
-
+    $('.nav-tabs').width($('#pages').width()-17);
 })();
 function setCookie(c_name,value,expiredays)
 {
@@ -50,10 +50,13 @@ function bodyscroll(){
     var activeframes = $(".tab-pane.active iframe");
     var tp = document.body.scrollTop;
     if (activeframes.length == 1) {
+        //var tab =  document.getElementsByClassName('nav-tabs');
+        var tabHeightFix = 0;
+        //if (tab.length > 0 ){ tabHeightFix = tab[0].clientHeight - 38; }
         var content = activeframes[0].contentDocument;
         var apptitle = content.getElementsByClassName("app-title");
         var wintool = content.getElementsByClassName("formtoolbox");
-        $(apptitle).css("top", (tp-2)+"px");
-        $(wintool).css("top", tp+"px");
+        $(apptitle).css("top", (tp+tabHeightFix)+"px");
+        $(wintool).css("top", tp+tabHeightFix+"px");
     }
 };

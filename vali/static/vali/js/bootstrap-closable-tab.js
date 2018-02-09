@@ -38,7 +38,7 @@ var closableTab = {
 		    $("#"+id).children().addClass("active").attr("aria-expanded", true);
 		    $("#"+container).addClass("active").addClass("show").attr("aria-expanded", true);
 		}
-
+        $(".tab-content").css({'margin-top': $('.nav-tabs').height()});
 		if (change_callback){
 		    change_callback($("#"+id));
 		}
@@ -63,5 +63,6 @@ var closableTab = {
    	    }
 		$("#"+val).remove();
 		$("#"+containerId).remove();
+		$(".tab-content").css({'margin-top': $('.nav-tabs').height()});
 	}
 }

@@ -21,6 +21,9 @@
 <script>
     function body_onload(){
         var obj = parent.document.getElementById("tab_frame_{{ opts.model_name }}");
+        //var tab =  parent.document.getElementsByClassName('nav-tabs');
+        //var tabHeightFix = 0;
+        //if (tab.length > 0 ){ tabHeightFix = tab[0].clientHeight; }
         if (obj != null){
             var wh = parent.window.innerHeight || parent.document.body.clientHeight;
             obj.height = Math.max(this.document.body.clientHeight, wh - 90);
@@ -67,29 +70,28 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="tile formtoolbox">
-                {% block object-tools %}
-                <div class="row">
-                    <div class="btn-group-vertical col-md-12" >
-                        {% block object-tools-items %}
-                            {% if has_add_permission %}
+            {% block object-tools %}
+                {% block object-tools-items %}
+                    {% if has_add_permission %}
+                    <div class="tile formtoolbox">
+                        <div class="row">
+                            <div class="btn-group-vertical col-md-12" >
                                 {% url cl.opts|admin_urlname:'add' as add_url %}
-
-                                <a href="{% add_preserved_filters add_url is_popup to_field %}" class="btn btn-primary">
+                                <a href="{% add_preserved_filters add_url is_popup to_field %}" class="btn btn-primary btn-sm">
                                     {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
                                 </a>
-                            {% endif %}
-                        {% endblock %}
+                            </div>
+                        </div>
                     </div>
-                    </div>
+                    {% endif %}
                 {% endblock %}
-            </div>
+            {% endblock %}
             {% if cl.has_filters or cl.search_fields %}
             <div class="tile formtoolbox">
                 {% block search %}{% search_form cl %}{% endblock %}
                 {% block filters %}
                     {% if cl.has_filters %}
-                        <div id="changelist-filter1" class="row" style="margin-bottom:5px;padding-top:8px;padding-bottom:1px;">
+                        <div id="dj-changelist-filter" class="row" style="margin-bottom:5px;padding-top:8px;padding-bottom:1px;">
                             <div class="card col-md-12">
                                 {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
                             </div>

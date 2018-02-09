@@ -152,7 +152,7 @@ function closeTab(item) {
 {% block content %}
 <div id="content-main" >
 <div id="pages" class="card text-white bg-light" role="tabpanel" style="border:0px">
-    <ul class="nav nav-tabs" style="position:fixed;width:100%;background-color:#f8f9fa !important">
+    <ul class="nav nav-tabs" style="position:fixed;background-color:#f8f9fa !important">
     </ul>
     <div class="tab-content" style="margin-top:40px">
     </div>
@@ -167,6 +167,6 @@ function closeTab(item) {
 {% block footscript %}
 <script src="{% static 'vali/js/index.js' %}"></script>
 <script>
-    addTab('dashboard', '{% trans "Home" %}', '/admin/vali/dashboard/', false, true);
+    addTab('dashboard', '{% trans "Home" %}', '/vali/dashboard/', false, true);
 </script>
 {% endblock %}
