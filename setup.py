@@ -5,9 +5,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-vali',
-    version='0.1.2',
+    version='0.1.3',
     description=(
-        'a django admin theme using vali-admin'
+        'a django admin theme using vali-admin and bootstrap closable nav-tabs,'
     ),
     long_description=open('README.rst').read(),
     author='cnanyi',
@@ -35,8 +35,6 @@ setup(
 
         # Supported versions of Python
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
