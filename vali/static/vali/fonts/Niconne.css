@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Niconne';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Niconne/Niconne.eot);
+  src: local('Niconne'), local('Niconne-Regular'), url(../fonts/Niconne/Niconne.woff2) format('woff2'), url(../fonts/Niconne/Niconne.woff) format('woff'), url(../fonts/Niconne/Niconne.eot?#iefix) format('embedded-opentype'), url(../fonts/Niconne/Niconne.ttf) format('truetype'), url(../fonts/Niconne/Niconne.svg#Niconne) format('svg');
+}
+
