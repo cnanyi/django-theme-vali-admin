@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-vali',
-    version='0.1.3',
+    version='0.1.4',
     description=(
         'a django admin theme using vali-admin and bootstrap closable nav-tabs,'
     ),
@@ -19,14 +19,12 @@ setup(
     include_package_data=True, 
     platforms=["all"],
     url='https://github.com/cnanyi/django-vali',
-    py_modules=['vali'],
+
     classifiers=[
         'Development Status :: 3 - Alpha',
 
         # Supported versions of Django
         'Framework :: Django',
-        'Framework :: Django :: 1.10',
-        'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
 
         'Intended Audience :: Developers',
