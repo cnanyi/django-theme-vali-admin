@@ -80,7 +80,7 @@ def vali_errors(errors):
 @register.simple_tag(name='VALI_THEME')
 def vali_theme():
     theme = vali_config('theme')
-    theme = theme if theme else 'default'
+    return theme if theme else 'default'
 
 
 def get_admin_site(current_app):
