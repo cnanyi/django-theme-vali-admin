@@ -3,7 +3,7 @@
     <div class="tile-title{% if fieldset.name %} line-head{% endif %}">
         {% if fieldset.name %}<h5>{{ fieldset.name }}</h5>{% endif %}
         {% if fieldset.description %}
-            <p class="text-info">{{ fieldset.description|safe }}</p>
+            <p class="text-info small">{{ fieldset.description|safe }}</p>
         {% endif %}
     </div>
     {% vali_fieldset fieldset as fieldset %}
@@ -17,13 +17,13 @@
                     {% endif %}
                     {% if field.is_checkbox %}
                         <div class="col-2">{{ field.label_tag }}</div>
-                        <div class="col-7"> <div class="animated-checkbox"><label>{{ field.field }}<span class="label-text"></span></label></div></div>
+                        <div class="col-7 px-0"> <div class="animated-checkbox"><label>{{ field.field }}<span class="label-text"></span></label></div></div>
                     {% else %}
-                        <div class="col-md-2"> {{ field.label_tag }}</div>
+                        <div class="col-2"> {{ field.label_tag }}</div>
                         {% if field.is_readonly %}
                             <div class="readonly">{{ field.contents }}</div>
                         {% else %}
-                            <div class="col-7"> {{ field.field }}
+                            <div class="col-7 px-0"> {{ field.field }}
                             {% if line.errors %}
                                 <div class="invalid-feedback">
                                 {% vali_errors line.errors %}
@@ -33,7 +33,7 @@
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}
-                        <p class="col-3 text-info pt-1"><em>{{ field.field.help_text|safe }}</em></p>
+                        <p class="col-3 text-info small pt-1"><em>{{ field.field.help_text|safe }}</em></p>
                     {% endif %}
                 </div>
             {% endfor %}

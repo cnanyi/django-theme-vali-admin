@@ -21,21 +21,21 @@
 {% block content %}
 <div class="tile">
 {% if perms_lacking %}
-    <p class="text-danger">{% blocktrans %}Deleting the selected {{ objects_name }} would result in deleting related objects, but your account doesn't have permission to delete the following types of objects:{% endblocktrans %}</p>
+    <p class="text-danger small">{% blocktrans %}Deleting the selected {{ objects_name }} would result in deleting related objects, but your account doesn't have permission to delete the following types of objects:{% endblocktrans %}</p>
     <ul class="list-group list-group-flush">
     {% for obj in perms_lacking %}
         <li class="clist-group-item">{{ obj }}</li>
     {% endfor %}
     </ul>
 {% elif protected %}
-    <p class="text-danger">{% blocktrans %}Deleting the selected {{ objects_name }} would require deleting the following protected related objects:{% endblocktrans %}</p>
+    <p class="text-danger small">{% blocktrans %}Deleting the selected {{ objects_name }} would require deleting the following protected related objects:{% endblocktrans %}</p>
     <ul class="list-group list-group-flush">
     {% for obj in protected %}
         <li class="list-group-item">{{ obj }}</li>
     {% endfor %}
     </ul>
 {% else %}
-    <p class="text-danger">{% blocktrans %}Are you sure you want to delete the selected {{ objects_name }}? All of the following objects and their related items will be deleted:{% endblocktrans %}</p>
+    <p class="text-danger small">{% blocktrans %}Are you sure you want to delete the selected {{ objects_name }}? All of the following objects and their related items will be deleted:{% endblocktrans %}</p>
     {% include "admin/includes/object_delete_summary.html" %}
     <h5>{% trans "Objects" %}</h5>
     {% for deletable_object in deletable_objects %}

@@ -14,6 +14,10 @@ padding: 20px 30px 10px;position:fixed!important;width: 100%;z-index:99;
 .list-group .list-group-item{padding: 0.25rem 0.75rem!important;}
 .messagelist {margin-top:66px;}
 
+.vTextField, .vLargeTextField,.vXMLLargeTextField{
+width:100%!important;
+}
+
 /* SORTABLE TABLES */
 
 thead th {
@@ -111,4 +115,33 @@ table thead th.sorted .sortoptions a.descending:hover {
 
 .inline-group .tabular tr.has_original td {
     padding-top: 0.5rem!important;
+}
+/* selectbox  */
+.related-widget-wrapper .selector{
+width:100%!important;
+}
+
+.related-widget-wrapper .selector select {
+width:100%!important;
+border-radius: 0 0 0px 0px;
+}
+.related-widget-wrapper .selector .selector-filter {
+display:flex;
+padding: 4px;
+}
+.related-widget-wrapper .selector .selector-available{
+width:45%!important;
+}
+.related-widget-wrapper .selector .selector-available input{
+height:1.6rem;
+width:100%;
+
+}
+.related-widget-wrapper .selector h2{
+font-size:18px;
+padding: 4px 0px;
+margin-bottom:0px!important;
+}
+.related-widget-wrapper .selector .selector-chosen{
+width:45%!important;
 }

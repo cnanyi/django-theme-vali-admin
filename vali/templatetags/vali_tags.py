@@ -48,8 +48,8 @@ def vali_fieldset(fieldset):
 
             if fieldset.form.errors and field in fieldset.form._errors:
                 oldclass = oldclass + ' is-invalid'
-
-            fieldset.form.fields[field].widget.attrs['class'] = oldclass + ' form-control'
+            if 'form-control' not in oldclass:
+                fieldset.form.fields[field].widget.attrs['class'] = oldclass + ' form-control'
     return fieldset
 
 

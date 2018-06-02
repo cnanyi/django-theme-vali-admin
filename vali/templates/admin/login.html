@@ -35,20 +35,20 @@
       </div>
       <div class="login-box">
         {% if form.errors and not form.non_field_errors %}
-          <p class="text-danger">
+          <p class="text-danger small">
           {% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
           </p>
           {% endif %}
 
           {% if form.non_field_errors %}
           {% for error in form.non_field_errors %}
-          <p class="text-danger">
+          <p class="text-danger small">
               {{ error }}
           </p>
           {% endfor %}
         {% endif %}
         {% if user.is_authenticated %}
-        <p class="text-danger">
+        <p class="text-danger small">
         {% blocktrans trimmed %}
             You are authenticated as {{ username }}, but are not authorized to
             access this page. Would you like to login to a different account?

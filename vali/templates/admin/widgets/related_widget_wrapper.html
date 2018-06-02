@@ -1,9 +1,9 @@
 {% load i18n static %}{% load vali_tags %}
-<div class="related-widget-wrapper row col">
-    <div class="col pl-0"> {% vali_rendered_widget rendered_widget %}</div>
+<div class="related-widget-wrapper row col pr-0">
+    <div class="col-11 px-0"> {% vali_rendered_widget rendered_widget %}</div>
     {% block links %}
         {% spaceless %}
-        <div class="col pt-1">
+        <div class="col pt-1 px-0">
         {% if can_change_related %}
          <a class="related-widget-wrapper-link change-related" id="change_id_{{ name }}"
             data-href-template="{{ change_related_template_url }}?{{ url_params }}"
