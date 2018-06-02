@@ -9,7 +9,7 @@ setup(
     description=(
         'a django admin theme using vali-admin and bootstrap closable nav-tabs,'
     ),
-    long_description=open('README.rst').read(),
+    long_description=open('README.md').read(),
     author='cnanyi',
     author_email='cnanyi@gmail.com',
     maintainer='cnanyi',
