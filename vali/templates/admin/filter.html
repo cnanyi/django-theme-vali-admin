@@ -1,9 +1,10 @@
 {% load i18n %}
-
-<label class="btn row" style="text-align:left;margin-bottom:0px">{% blocktrans with filter_title=title %} {{ filter_title }}: {% endblocktrans %}
-    <select onchange="filter_changed(this)">
+<div class="col mb-3">
+    <div class="card-title"><h6>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h6></div>
+    <div class="list-group list-group-flush">
     {% for choice in choices %}
-        <option {% if choice.selected %}selected="selected"{% endif %} value="{{ choice.query_string|iriencode }}">{{ choice.display }}</option>
+        <a class="list-group-item list-group-item-action{% if choice.selected %} active text-white{% endif %}"  href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a>
     {% endfor %}
-    </select>
-</label>
+    </div>
+
+</div>
