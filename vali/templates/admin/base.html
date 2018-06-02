@@ -7,7 +7,7 @@
 <title>{% block title %}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 {# <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}" /> #}
-    <link rel="stylesheet" type="text/css" href="{% static '' %}vali/{% VALI_THEME %}/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="{% static '' %}vali/themes/{% VALI_THEME %}/main.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'vali/assets/vali.css' %}" />
     {% if VALI_CONFIG.font_awesome_url %}
     <link rel="stylesheet" type="text/css" href="{% static VALI_CONFIG.font_awesome_url %}" />
@@ -188,13 +188,13 @@
     {% block footer %}<div id="footer"></div>{% endblock %}
 </div>
 <!-- END Container -->
-<script src="{% static ''%}vali/{% VALI_THEME %}/js/jquery-3.2.1.min.js"></script>
-<script src="{% static ''%}vali/{% VALI_THEME %}/js/popper.min.js"></script>
-<script src="{% static ''%}vali/{% VALI_THEME %}/js/bootstrap.min.js"></script>
-<script src="{% static ''%}vali/{% VALI_THEME %}/js/main.js"></script>
+<script src="{% static ''%}vali/assets/js/jquery-3.2.1.min.js"></script>
+<script src="{% static ''%}vali/assets/js/popper.min.js"></script>
+<script src="{% static ''%}vali/assets/js/bootstrap.min.js"></script>
+<script src="{% static ''%}vali/assets/js/main.js"></script>
 <script src="{% static 'vali/assets/vali.js' %}"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="{% static ''%}vali/{% VALI_THEME %}/js/plugins/pace.min.js"></script>
+<script src="{% static ''%}vali/assets/js/plugins/pace.min.js"></script>
 {% block extrafoot %}{% endblock %}
 </body>
 </html>

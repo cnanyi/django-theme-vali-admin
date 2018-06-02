@@ -28,8 +28,13 @@ How to use
 ```
 VALI_CONFIG = {
     # 'dashboard': {'name': '主面板', 'url': '/admin/'},
+    # 'theme': 'default',  #  other choice: default, blue, purple, brown, green
 }
 ```
+
+- find more info for style customize at [pratikborsadiya' blog ](https://pratikborsadiya.in/blog/vali-admin/)
+
+
 - run server
 ```
     $ ./manage.py runserver
