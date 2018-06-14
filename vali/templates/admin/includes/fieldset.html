@@ -13,7 +13,7 @@
             {% for field in line %}
                 <div{% if not line.fields|length_is:'1' %} class="row col field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} is_invalid{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %} class="row col checkbox-row"{% else %} class="row col"{% endif %}>
                     {% if not line.fields|length_is:'1' and not field.is_readonly %}
-                        {% vali_errors field.errors %}
+                        {% vali_form_errors field.errors %}
                     {% endif %}
                     {% if field.is_checkbox %}
                         <div class="col-2">{{ field.label_tag }}</div>
@@ -26,7 +26,7 @@
                             <div class="col-7 px-0"> {{ field.field }}
                             {% if line.errors %}
                                 <div class="invalid-feedback">
-                                {% vali_errors line.errors %}
+                                {% vali_form_errors line.errors %}
                                 </div>
                                 {% endif %}
                             </div>

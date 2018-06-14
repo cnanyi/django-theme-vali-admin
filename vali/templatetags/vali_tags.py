@@ -11,6 +11,9 @@ from vali.widgets import ValiRelatedFieldWidgetWrapper
 register = template.Library()
 
 
+DEFAULT_CONFIG = {'theme': 'default', 'applist': {}}
+
+
 @register.simple_tag(takes_context=True)
 def get_menu(context, request):
     """ copy from django-suit project, return the system app_list directly """
@@ -18,17 +21,46 @@ def get_menu(context, request):
         return None
     if hasattr(request, 'current_app'):
         # Django 1.8 uses request.current_app instead of context.current_app
-        template_response = get_admin_site(request.current_app).index(request)
+        site = get_admin_site(request.current_app)
     else:
         try:
-            template_response = get_admin_site(context.current_app).index(request)
+            site = get_admin_site(context.current_app)
         # Django 1.10 removed the current_app parameter for some classes and functions.
         # Check the release notes.
         except AttributeError:
-            template_response = get_admin_site(context.request.resolver_match.namespace).index(request)
+            site = get_admin_site(context.request.resolver_match.namespace)
     try:
+        template_response = site.index(request)
         app_list = template_response.context_data['app_list']
-    except Exception:
+        _config = vali_config('applist')
+        if 'order' in _config and _config['order'] == 'registry':
+            orders = [x._meta.object_name for x in site._registry.keys()]
+            for app in app_list:
+                app['models'] = sorted(app['models'], key=lambda x: orders.index(x['object_name']))
+        if 'group' in _config and _config['group']:
+            for app in app_list:
+                model_list = app['models']
+                destlist = []
+                groups = {}
+                for m in model_list:
+                    marker = _config['group_marker'] if 'group_marker' in _config else '-'
+                    if marker in m['name']:
+                        grp, name = m['name'].split(marker)
+                        m['name'] = name
+                        if grp in groups:
+                            groups[grp]['models'].append(m)
+                        else:
+                            grpobj = {'group_name': grp, 'models': [m]}
+                            groups[grp] = grpobj
+                            destlist.append(grpobj)
+
+                        m['name'] = name
+                    else:
+                        destlist.append(m)
+                app['models'] = destlist
+
+    except Exception as e:
+        print(e)
         return
     return app_list
 
@@ -72,7 +104,7 @@ def vali_rendered_widget(widget):
 
 
 @register.simple_tag()
-def vali_errors(errors):
+def vali_form_errors(errors):
 
     return mark_safe(re.sub('<.+?>', '', errors))
 
@@ -107,10 +139,13 @@ def get_admin_site(current_app):
 def vali_config(param=None):
     config_key = 'VALI_CONFIG'
     if hasattr(settings, config_key):
-        config = getattr(settings, config_key, {})
+        config = getattr(settings, config_key, DEFAULT_CONFIG)
     else:
-        config = {'theme': 'default'}
+        config = DEFAULT_CONFIG
     if param:
-        return config.get(param)
+        if param in config:
+            return config.get(param)
+        else:
+            return {}
     else:
         return config

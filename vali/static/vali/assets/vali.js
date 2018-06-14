@@ -7,4 +7,5 @@
         }
         $('.object-tools').toggleClass('object-tools-mr');
     });
+
 })();

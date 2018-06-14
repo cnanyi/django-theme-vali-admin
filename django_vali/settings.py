@@ -129,5 +129,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 VALI_CONFIG = {
-    'theme': 'default'  # default, blue, purple, brown, green
+    # the vali-admin themes  default, blue, purple, green,brown
+    'theme': 'default',
+    'dashboard': {'name': '主面板', 'url': '/admin/'},
+    # the order for applist  default, registry
+    # display applist by group, use mark in verbose_name_plural,
+    # e.g.  verbose_name_plural = system-user
+    # display the model "user" in group "system"
+    'applist': {"order": "registry", "group": True, "group_marker": "-"},
+    # default: //maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+    # 'font_awesome_url': 'font-awesome-4.7.0/css/font-awesome.min.css',
 }

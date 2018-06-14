@@ -63,7 +63,7 @@
         </p>
         {{ cl.formset.non_form_errors }}
     {% endif %}
-    <div class="col tile mr-4 module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+    <div class="tile module{% if cl.has_filters %} filtered col-9{%else%} col{% endif %}" id="changelist">
       <div id="sampleTable_filter" class="dataTables_filter">
         {% block search %}{% search_form cl %}{% endblock %}
       </div>
@@ -91,7 +91,7 @@
     </div>
     {% block filters %}
         {% if cl.has_filters %}
-          <div id="changelist-filter-1" class="col-2 tile">
+          <div id="changelist-filter-1" class="col tile ml-4">
             <div class="tile-title"><h5>{% trans 'Filter' %}</h5></div>
             <div class="tile-body">
             {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}

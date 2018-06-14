@@ -7,6 +7,7 @@
 <title>{% block title %}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 {# <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}" /> #}
+    <link rel="stylesheet" type="text/css" href="{% static 'vali/assets/js/plugins/bootstrap-treeview.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static '' %}vali/themes/{% VALI_THEME %}/main.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'vali/assets/vali.css' %}" />
     {% if VALI_CONFIG.font_awesome_url %}
@@ -105,9 +106,10 @@
         </div>
         </div>
         <ul class="app-menu">
-            {% url 'admin:index' as adminurl %}
-
-            <li><a class="app-menu__item {%if request.path == adminurl %}active{% endif %}" href="{{ VALI_CONFIG.dashboard.url|default:adminurl}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ VALI_CONFIG.dashboard.name|default:'Dashboard' }}</span></a></li>
+            {% if VALI_CONFIG.dashboard %}
+                {% url 'admin:index' as adminurl %}
+                <li><a class="app-menu__item {%if request.path == adminurl %}active{% endif %}" href="{{ VALI_CONFIG.dashboard.url|default:adminurl}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ VALI_CONFIG.dashboard.name|default:'Dashboard' }}</span></a></li>
+            {% endif %}
             {% get_menu request as app_list %}
             {% if app_list %}
                 {% for app in app_list %}
@@ -119,10 +121,29 @@
                     </a>
                     <ul class="treeview-menu">
                         {% for model in app.models %}
-                            {% if model.admin_url %}
-                                <li><a class="treeview-item model-{{ model.object_name|lower }} {% if  model.admin_url in request.path %} active{% endif %}" href="{{ model.admin_url }}"><i class="icon fa fa-circle-o"></i> {{ model.name }}</a></li>
+                            {% if model.group_name %}
+                                <li class="treegroup{% if app.app_url in request.path %} is-expanded{% endif%}">
+                                    <a class="app-menu__item" href="javascript:void(0)" data-toggle="treegroup" title="{{ model.group_name }}">
+                                        <i class="app-menu__icon fa fa-dot-circle-o ml-2"></i>
+                                        <span class="app-menu__label">{{ model.group_name }}</span>
+                                        <i class="treegroup-indicator fa fa-angle-right"></i>
+                                    </a>
+                                    <ul class="treegroup-menu pl-0">
+                                        {% for submodel in model.models %}
+                                            {% if submodel.admin_url %}
+                                                <li><a class="treeview-item model-{{ submodel.object_name|lower }} {% if  submodel.admin_url in request.path %} active{% endif %}" href="{{ submodel.admin_url }}"><i class="icon fa fa-circle-o pl-3"></i> {{ submodel.name }}</a></li>
+                                            {% else %}
+                                                <li>{{ submodel.name }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
                             {% else %}
-                                <li>{{ model.name }}</li>
+                                {% if model.admin_url %}
+                                    <li><a class="ml-2 treeview-item model-{{ model.object_name|lower }} {% if  model.admin_url in request.path %} active{% endif %}" href="{{ model.admin_url }}"><i class="icon fa fa-circle-o"></i> {{ model.name }}</a></li>
+                                {% else %}
+                                    <li>{{ model.name }}</li>
+                                {% endif %}
                             {% endif %}
                       {% endfor %}
                     </ul>
@@ -138,7 +159,7 @@
 {% endif %}
 
 <!-- Container -->
-<div id="container" class="app-content">
+<div id="container" class="{% if not is_popup %}app-content{% endif %}">
 
     {% if not is_popup %}
         <div class="app-title">
@@ -194,6 +215,7 @@
 <script src="{% static ''%}vali/assets/js/main.js"></script>
 <script src="{% static 'vali/assets/vali.js' %}"></script>
 <!-- The javascript plugin to display page loading on top-->
+{# <script src="{% static ''%}vali/assets/js/plugins/bootstrap-treeview.min.js"></script> #}
 <script src="{% static ''%}vali/assets/js/plugins/pace.min.js"></script>
 {% block extrafoot %}{% endblock %}
 </body>

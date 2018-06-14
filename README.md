@@ -29,6 +29,14 @@ How to use
 VALI_CONFIG = {
     # 'dashboard': {'name': '主面板', 'url': '/admin/'},
     # 'theme': 'default',  #  other choice: default, blue, purple, brown, green
+
+    # the order for applist:  default, registry
+    # 'default' use django's default behavior
+    # 'registry' use the sequence of register() in admin.py, (admin_site._registry)
+    # display applist by group, use mark in verbose_name_plural,
+    # e.g.  verbose_name_plural = system-user
+    # display the model "user" in group "system"
+    'applist': {"order": "registry", "group": False, "group_marker": "-"},
 }
 ```
 
