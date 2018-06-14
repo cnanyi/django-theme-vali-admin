@@ -64,6 +64,7 @@ Todo
 --------
 
 - modify ValiRelatedFieldWidgetWrapper with Vali theme
-- support more theme support
-- app/model orders
+-(done) support more theme support
+-(done) app/model orders
+-(done) app/model groups
 - ...
