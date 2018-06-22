@@ -38,31 +38,57 @@ def get_menu(context, request):
             for app in app_list:
                 app['models'] = sorted(app['models'], key=lambda x: orders.index(x['object_name']))
         if 'group' in _config and _config['group']:
-            for app in app_list:
-                model_list = app['models']
-                destlist = []
-                groups = {}
-                for m in model_list:
-                    marker = _config['group_marker'] if 'group_marker' in _config else '-'
-                    if marker in m['name']:
-                        grp, name = m['name'].split(marker)
-                        m['name'] = name
-                        if grp in groups:
-                            groups[grp]['models'].append(m)
+            if 'group_marker' in _config and _config['group_marker']:
+                _make_group_with_markder(app_list, _config)
+            else:
+                # default, group by decorator for ModelAdmin: @vali_models_group
+                model_groups = dict([(x.model._meta.object_name, x.model_group) for x in site._registry.values() if hasattr(x, 'model_group')])
+                for app in app_list:
+                    model_list = app['models']
+                    destlist = []
+                    groups = {}
+                    for m in model_list:
+                        if m['object_name'] in model_groups:
+                            grp = model_groups[m['object_name']]
+                            if grp in groups:
+                                groups[grp]['models'].append(m)
+                            else:
+                                grpobj = {'group_name': grp, 'models': [m]}
+                                groups[grp] = grpobj
+                                destlist.append(grpobj)
                         else:
-                            grpobj = {'group_name': grp, 'models': [m]}
-                            groups[grp] = grpobj
-                            destlist.append(grpobj)
-
-                        m['name'] = name
-                    else:
-                        destlist.append(m)
-                app['models'] = destlist
+                            destlist.append(m)
+                    app['models'] = destlist
+                pass
 
     except Exception as e:
         print(e)
         return
     return app_list
+
+
+def _make_group_with_markder(app_list, _config):
+    """internal method , use group_marker . would be deprecated in next version 0.2.0 """
+    for app in app_list:
+        model_list = app['models']
+        destlist = []
+        groups = {}
+        for m in model_list:
+            marker = _config['group_marker'] if 'group_marker' in _config else '-'
+            if marker in m['name']:
+                grp, name = m['name'].split(marker)
+                m['name'] = name
+                if grp in groups:
+                    groups[grp]['models'].append(m)
+                else:
+                    grpobj = {'group_name': grp, 'models': [m]}
+                    groups[grp] = grpobj
+                    destlist.append(grpobj)
+
+                m['name'] = name
+            else:
+                destlist.append(m)
+        app['models'] = destlist
 
 
 @register.simple_tag()
