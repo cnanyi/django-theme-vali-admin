@@ -7,5 +7,7 @@
         }
         $('.object-tools').toggleClass('object-tools-mr');
     });
-
+    if ($('.vali-multicheckbox').length > 0){
+        $('.vali-multicheckbox li').addClass('list-group-item');
+    }
 })();

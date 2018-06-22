@@ -187,3 +187,7 @@ margin-bottom:0px!important;
 .related-widget-wrapper .selector .selector-chosen{
 width:45%!important;
 }
+
+ul.form-control.vali-multicheckbox {
+    border:none;
+}
