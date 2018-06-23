@@ -17,13 +17,13 @@
                     {% endif %}
                     {% if field.is_checkbox %}
                         <div class="col-2">{{ field.label_tag }}</div>
-                        <div class="col-7 px-0"> <div class="animated-checkbox"><label>{{ field.field }}<span class="label-text"></span></label></div></div>
+                        <div class="col px-0"> <div class="animated-checkbox"><label>{{ field.field }}<span class="label-text"></span></label></div></div>
                     {% else %}
                         <div class="col-2"> {{ field.label_tag }}</div>
                         {% if field.is_readonly %}
                             <div class="readonly">{{ field.contents }}</div>
                         {% else %}
-                            <div class="col-7 px-0"> {{ field.field }}
+                            <div class="col px-0"> {{ field.field }}
                             {% if line.errors %}
                                 <div class="invalid-feedback">
                                 {% vali_form_errors line.errors %}
