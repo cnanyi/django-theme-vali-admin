@@ -1,7 +1,10 @@
 {% load i18n static %}{% load vali_tags %}
 <div class="related-widget-wrapper row col pr-0">
-    <div class="col-11 px-0"> {% vali_rendered_widget rendered_widget %}</div>
+    <div class="{% if can_change_related or can_add_related or can_delete_related %}col-11{% else %}col{% endif %} px-0">
+        {% vali_rendered_widget rendered_widget %}
+    </div>
     {% block links %}
+        {% if can_change_related or can_add_related or can_delete_related %}
         {% spaceless %}
         <div class="col pt-1 px-0">
         {% if can_change_related %}
@@ -27,5 +30,6 @@
         {% endif %}
             </div>
         {% endspaceless %}
+        {% endif %}
     {% endblock %}
 </div>

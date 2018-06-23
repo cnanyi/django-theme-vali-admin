@@ -8,42 +8,45 @@
         $('.object-tools').toggleClass('object-tools-mr');
     });
     if ($('.vali-multicheckbox').length > 0){
-        //$('.vali-multicheckbox li').addClass('list-group-item');
+        //handle permission's help text , hide <p>
+        $('.related-widget-wrapper').parent().addClass('col').removeClass('col-7').next().hide();
         // ul
         $('.vali-multicheckbox').each(function(){
-            // li
+            // if the label's text is seprate appname | modelname | permission
             var is_perm_label = false;
             var inputs = {};
+            // li
             $(this).children().each(function(){
                 var lbl = $(this).find('label');
                 if (lbl.length > 0){
                     var txts = lbl.text().trim().split('|');
-                    // app | model | permissions
+                    // app | model | permission
                     if (txts.length  == 3){
                         is_perm_label = true;
                         var appname = txts[0].trim();
                         var modelname = txts[1].trim();
                         var permission = txts[2].trim();
-                        //lbl.text(permission);
+                        var perm_html = '<div class="animated-checkbox"><label>'+lbl.find('input').prop('outerHTML')+'<span class="label-text">'+permission+'</span></label></div>';
                         if (appname in inputs){
                             if (modelname in inputs[appname]){
-                                inputs[appname][modelname].push(lbl.find('input').prop('outerHTML')+permission);
+                                inputs[appname][modelname].push(perm_html);
                             }else{
-                                //
+                                // nothing happened here
                             }
                         }else{
                             inputs[appname] = {};
-                            inputs[appname][modelname] = [lbl.find('input').prop('outerHTML')+permission];
+                            inputs[appname][modelname] = [perm_html];
                         }
                     }
                 }
             });
             if (is_perm_label){
+                // rebuild lines appname | model | permissions for add change delete
                 var html = "";
                 for (var key in inputs) {
-                    html += '<li class="list-group-item"><div class="row"><span class="col-2">'+key+'</span>';
+                    html += '<li class="list-group-item list-group-item-action"><div class="row"><span class="col-2">'+key+'</span>';
                     for (var mkey in inputs[key]){
-                        html += '<div class="col row"><span class="col">'+mkey+'</span>';
+                        html += '<div class="col row px-0"><span class="col-2">'+mkey+'</span>';
                         inputs[key][mkey].sort();
                         for (var inputkey in inputs[key][mkey]){
                             html += '<div class="col">'+ inputs[key][mkey][inputkey]+'</div>';

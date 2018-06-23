@@ -191,3 +191,6 @@ width:45%!important;
 ul.form-control.vali-multicheckbox {
     border:none;
 }
+ul.form-control.vali-multicheckbox input {
+    margin-right:5px;
+}
