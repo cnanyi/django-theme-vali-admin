@@ -29,7 +29,7 @@ How to use
 VALI_CONFIG = {
     # the vali-admin themes  default, blue, purple, green,brown
     'theme': 'default',
-    'dashboard': {'name': '主面板', 'url': '/admin/'},
+    'dashboard': {'name': 'dashboard', 'url': '/admin/'},
     # the order for applist  default, registry
     # display applist by group: True
     #  e.g. {group: True}
@@ -53,6 +53,7 @@ VALI_CONFIG = {
 ```
 
 - Point your browser to http://localhost:8000
+- Login with user:  demo , password: demo
 
 Thanks
 ---
@@ -67,7 +68,8 @@ This project is licensed under the [MIT](LICENSE) License
 Todo
 --------
 
-- modify ValiRelatedFieldWidgetWrapper with Vali theme
+-(remoe)modify ValiRelatedFieldWidgetWrapper with Vali theme
+-(done) replace ValiRelatedFieldWidgetWrapper with ValiCheckboxSelectMultiple, show user permission with groups
 -(done) support more theme support
 -(done) app/model orders
 -(done) app/model groups

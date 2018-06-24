@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='django-vali',
-    version='0.1.9',
+    version='0.2.0',
     description="a django admin theme using vali-admin with bootstrap4",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
