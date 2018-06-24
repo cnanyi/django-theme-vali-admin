@@ -31,7 +31,7 @@
                             if (modelname in inputs[appname]){
                                 inputs[appname][modelname].push(perm_html);
                             }else{
-                                // nothing happened here
+                                inputs[appname][modelname] = [perm_html];
                             }
                         }else{
                             inputs[appname] = {};
@@ -44,16 +44,17 @@
                 // rebuild lines appname | model | permissions for add change delete
                 var html = "";
                 for (var key in inputs) {
-                    html += '<li class="list-group-item list-group-item-action"><div class="row"><span class="col-2">'+key+'</span>';
+                    html += '<li class="list-group-item list-group-item-action"><div class="row"><span class="col-2">'
+                    +key+'</span><div class="col">';
                     for (var mkey in inputs[key]){
-                        html += '<div class="col row px-0"><span class="col-2">'+mkey+'</span>';
+                        html += '<div class="row px-0 line-head"><span class="col-2">'+mkey+'</span>';
                         inputs[key][mkey].sort();
                         for (var inputkey in inputs[key][mkey]){
                             html += '<div class="col">'+ inputs[key][mkey][inputkey]+'</div>';
                         }
                         html += '</div>';
                     }
-                    html += '</div></li>';
+                    html += '</div></div></li>';
                 }
                 $(this).children().remove();
                 $(this).html(html);
