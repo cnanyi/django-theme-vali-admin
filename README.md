@@ -2,7 +2,11 @@ Django-vali
 ------------
 - platform Backend part built using the `Django`,
 - replace default admin templates using `Vali Admin`
-![screenshoot](https://github.com/cnanyi/django-vali/blob/master/image.png?raw=true)
+![screenshoot](https://github.com/cnanyi/django-vali/blob/master/django_vali_ss1.png?raw=true)
+![screenshoot](https://github.com/cnanyi/django-vali/blob/master/django_vali_ss2.png?raw=true)
+![screenshoot](https://github.com/cnanyi/django-vali/blob/master/django_vali_ss3.png?raw=true)
+![screenshoot](https://github.com/cnanyi/django-vali/blob/master/django_vali_ss4.png?raw=true)
+
 Requirements
 ------------
 
