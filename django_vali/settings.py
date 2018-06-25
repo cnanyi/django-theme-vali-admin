@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'demo',
 ]
 
 MIDDLEWARE = [
@@ -104,9 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+# LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Shanghai'
+# TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -131,7 +134,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 VALI_CONFIG = {
     # the vali-admin themes  default, blue, purple, green,brown
     'theme': 'default',
-    'dashboard': {'name': '主面板', 'url': '/admin/'},
+    'dashboard': {'name': 'Dashboard', 'url': '/admin/'},
     # the order for applist  default, registry
     # display applist by group: True
     #  e.g. {group: True}
@@ -141,6 +144,6 @@ VALI_CONFIG = {
     #    verbose_name_plural = system-user
     #  * display the model "user" in group "system"
     'applist': {"order": "registry", "group": True},
-# default: //maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
-# 'font_awesome_url': 'font-awesome-4.7.0/css/font-awesome.min.css',
+    # default: //maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+    # 'font_awesome_url': '/local/path/to/font-awesome-4.7.0/css/font-awesome.min.css',
 }
