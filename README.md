@@ -10,14 +10,14 @@ Django-vali
 Requirements
 ------------
 
-* django >= 2.0
-* python >= 3.5
+* django >= 3.1
+* python >= 3.6
 
 How to use
 ----------
 - Install with pip
 
-    $ pip install django-vali
+    $ pip install django-theme-vali-admin
 
 - Add `vali` to your `INSTALLED_APPS` setting like this:
 ```

@@ -134,7 +134,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 VALI_CONFIG = {
     # the vali-admin themes  default, blue, purple, green,brown
     'theme': 'default',
-    'dashboard': {'name': 'Dashboard', 'url': '/admin/'},
+    'dashboard': {'name': 'Dashboard', 'url': '/vali/dashboard/'},
     # the order for applist  default, registry
     # display applist by group: True
     #  e.g. {group: True}
